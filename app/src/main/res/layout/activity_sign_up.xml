@@ -16,11 +16,6 @@
         app:layout_constraintTop_toTopOf="parent">
     </ProgressBar>
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></LinearLayout>
-
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="0dp"
@@ -43,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text=""
+        android:layout_marginTop="24dp"
+        android:text="Masukkan Nama"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
@@ -77,7 +72,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:hint=""
-        android:text=""
+        android:text="Masukkan Email"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout" />
