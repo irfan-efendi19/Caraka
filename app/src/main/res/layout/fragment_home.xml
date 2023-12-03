@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title_kamus"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_dictionary"
-            tools:orientation="horizontal"/>
+            tools:orientation="horizontal" />
 
         <TextView
             android:id="@+id/title_sejarah"
@@ -119,6 +119,6 @@
             app:layout_constraintTop_toBottomOf="@+id/title_kuis"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_dictionary"
-            tools:orientation="horizontal"/>
+            tools:orientation="horizontal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
