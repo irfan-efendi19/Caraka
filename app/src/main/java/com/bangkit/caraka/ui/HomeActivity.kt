@@ -7,11 +7,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.ActivityHomeBinding
-import com.bangkit.caraka.ui.onBoarding.domain.OnBoardingPrefManager
+import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 
 class HomeActivity : AppCompatActivity() {

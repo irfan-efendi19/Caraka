@@ -11,11 +11,11 @@
                 />
         </targets>
         <transition
-                class="com.bangkit.caraka.ui.onBoarding.core.PopTransition"
+                class="com.bangkit.caraka.ui.onBoarding.animation.PopTransition"
                 app:startScale="0.95"
                 app:endScale="1.0"/>
         <transition
-                class="com.bangkit.caraka.ui.onBoarding.core.FadeTransition"
+                class="com.bangkit.caraka.ui.onBoarding.animation.FadeTransition"
                 app:startAlpha="0.3"
                 app:endAlpha="1.0"/>
     </transitionSet>

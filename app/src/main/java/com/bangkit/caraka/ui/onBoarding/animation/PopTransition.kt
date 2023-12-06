@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui.onBoarding.core
+package com.bangkit.caraka.ui.onBoarding.animation
 
 import android.animation.Animator
 import android.animation.ObjectAnimator

@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui.onBoarding.domain
+package com.bangkit.caraka.ui.onBoarding.prefmanager
 
 import android.content.Context
 import android.content.SharedPreferences
