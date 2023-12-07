@@ -11,7 +11,7 @@ import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.onBoarding.animation.setParallaxTransformation
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingPagerAdapter
-import com.bangkit.caraka.ui.onBoarding.feature.onboarding.entity.OnBoardingPage
+import com.bangkit.caraka.ui.onboarding.feature.onboarding.entity.OnBoardingPage
 
 class OnBoardingView @JvmOverloads
 constructor(

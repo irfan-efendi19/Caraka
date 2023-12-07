@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.ActivityHomeBinding
+import com.bangkit.caraka.ui.camera.CameraActivity
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 
@@ -35,11 +36,17 @@ class HomeActivity : AppCompatActivity() {
             val navView: BottomNavigationView = binding.navView
 
             val navController = findNavController(R.id.nav_host_fragment_activity_home)
-            val appBarConfiguration = AppBarConfiguration.Builder(
+            AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_profile
             ).build()
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+
+            
             navView.setupWithNavController(navController)
+        }
+
+        binding.cameraButton.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.caraka.databinding.OnboardingPageItemBinding
-import com.bangkit.caraka.ui.onBoarding.feature.onboarding.entity.OnBoardingPage
+import com.bangkit.caraka.ui.onboarding.feature.onboarding.entity.OnBoardingPage
 
 /**
  *OnBoardingPagerAdapter adapter for the viewpager2

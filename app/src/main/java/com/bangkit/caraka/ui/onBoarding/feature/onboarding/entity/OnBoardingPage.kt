@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui.onBoarding.feature.onboarding.entity
+package com.bangkit.caraka.ui.onboarding.feature.onboarding.entity
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.bangkit.caraka.R
