@@ -20,7 +20,7 @@ object QuestionBaliData {
 
         val soal2 = Question(
             2,
-            "What country flag is this", R.drawable.banner,
+            "Apa Artinya Aksara Ini?", R.drawable.banner,
             "Australia",
             "Argentina",
             "Mexico",
@@ -30,7 +30,7 @@ object QuestionBaliData {
 
         val soal3 = Question(
             3,
-            "What country flag is this", R.drawable.banner,
+            "Apa Artinya Aksara Ini?", R.drawable.banner,
             "Mexico",
             "France",
             "Africa",
