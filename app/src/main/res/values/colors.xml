@@ -11,4 +11,7 @@
     <color name="colorBlueMidnight">#003366</color>
     <color name="colorGrey">#C9C9C9</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="Buttoncorrect">#2ECC71</color>
+    <color name="Buttonfalse">#E74C3C</color>
+    <color name="Buttonselect">#3498db</color>
 </resources>

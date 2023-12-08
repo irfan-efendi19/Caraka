@@ -40,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_profile
             ).build()
 
-            
+
             navView.setupWithNavController(navController)
         }
 
