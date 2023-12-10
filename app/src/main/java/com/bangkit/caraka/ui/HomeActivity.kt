@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.ActivityHomeBinding
 import com.bangkit.caraka.ui.camera.CameraActivity
-import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
+import com.bangkit.caraka.ui.onboarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 
 class HomeActivity : AppCompatActivity() {

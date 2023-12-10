@@ -10,101 +10,110 @@ object QuestionBaliData {
         val soal1 = Question(
             1,
             "Apa Artinya Aksara Ini?",
-            R.drawable.banner,
-            "Australia",
-            "Argentina",
-            "Armenia",
-            "USA",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             1
         )
 
         val soal2 = Question(
             2,
-            "Apa Artinya Aksara Ini?", R.drawable.banner,
-            "Australia",
-            "Argentina",
-            "Mexico",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             3
         )
 
         val soal3 = Question(
             3,
-            "Apa Artinya Aksara Ini?", R.drawable.banner,
-            "Mexico",
-            "France",
-            "Africa",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             2
         )
 
         val soal4 = Question(
             4,
-            "What country flag is this", R.drawable.banner,
-            "Kazakistan",
-            "Ukraine",
-            "Turkey",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             3
         )
 
         val soal5 = Question(
             5,
-            "What country flag is this", R.drawable.banner,
-            "USA",
-            "Argentina",
-            "Armenia",
-            "South America",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             1
         )
 
         val soal6 = Question(
             6,
-            "What country flag is this", R.drawable.banner,
-            "Australia",
-            "Argentina",
-            "UK",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             3
         )
 
         val soal7 = Question(
             7,
-            "What country flag is this", R.drawable.banner,
-            "Scotland",
-            "European Union",
-            "Armenia",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             2
         )
 
         val soal8 = Question(
             8,
-            "What country flag is this", R.drawable.banner,
-            "Netherlands",
-            "Spain",
-            "Belgium",
-            "Germany",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             4
         )
 
         val soal9 = Question(
             9,
-            "What country flag is this", R.drawable.banner,
-            "Denmark",
-            "Argentina",
-            "Canada",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             3
         )
 
         val soal10 = Question(
             10,
-            "What country flag is this", R.drawable.banner,
-            "India",
-            "Iran",
-            "Ireland",
-            "USA",
+            "Apa Artinya Aksara Ini?",
+            R.drawable.bali_ba_min,
+            "ha",
+            "na",
+            "ca",
+            "ra",
             1
         )
 

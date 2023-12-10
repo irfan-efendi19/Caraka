@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.caraka.databinding.OnboardingViewBinding
 import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.onBoarding.animation.setParallaxTransformation
-import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
+import com.bangkit.caraka.ui.onboarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingPagerAdapter
 import com.bangkit.caraka.ui.onboarding.feature.onboarding.entity.OnBoardingPage
 

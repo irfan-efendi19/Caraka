@@ -15,4 +15,5 @@
     <color name="Buttonfalse">#E74C3C</color>
     <color name="Buttonselect">#3498db</color>
     <color name="bgcardscore">#f3a683</color>
+    <color name="bgquestioncard">#FFFFFF</color>
 </resources>

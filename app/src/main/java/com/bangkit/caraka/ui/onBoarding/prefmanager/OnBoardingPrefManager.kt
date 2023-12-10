@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui.onBoarding.prefmanager
+package com.bangkit.caraka.ui.onboarding.prefmanager
 
 import android.content.Context
 import android.content.SharedPreferences
