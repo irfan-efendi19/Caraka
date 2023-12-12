@@ -53,8 +53,9 @@
                 android:layout_margin="15dp"
                 android:gravity="center"
                 android:text="Kuis"
+                android:fontFamily="@font/quizzical_pitch"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="50sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
