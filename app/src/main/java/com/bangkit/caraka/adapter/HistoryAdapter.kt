@@ -1,4 +1,3 @@
 package com.bangkit.caraka.adapter
 
-class HistoryAdapter {
-}
+class HistoryAdapter

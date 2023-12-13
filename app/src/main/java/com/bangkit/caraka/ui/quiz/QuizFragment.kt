@@ -17,11 +17,12 @@ import com.bangkit.caraka.R
 import com.bangkit.caraka.data.Question
 import com.bangkit.caraka.data.QuestionBaliData
 import com.bangkit.caraka.databinding.FragmentQuizBinding
+import com.bangkit.caraka.databinding.FragmentScoreBinding
 
 
 class QuizFragment : Fragment(), View.OnClickListener {
 
-
+    private var _binding: FragmentQuizBinding? = null
     private lateinit var binding: FragmentQuizBinding
     private lateinit var mQuestionsList: ArrayList<Question>
 
@@ -32,7 +33,7 @@ class QuizFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz, container, false)
 
         mQuestionsList = QuestionBaliData.getQuestionQuestionBali()
@@ -187,5 +188,9 @@ class QuizFragment : Fragment(), View.OnClickListener {
                     context?.let { ContextCompat.getDrawable(it, drawableView) }
             }
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
