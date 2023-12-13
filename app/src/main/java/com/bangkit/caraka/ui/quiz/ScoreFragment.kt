@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.caraka.R
+import com.bangkit.caraka.databinding.FragmentHomeBinding
 import com.bangkit.caraka.databinding.FragmentScoreBinding
 import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.camera.CameraActivity
@@ -18,6 +19,7 @@ import com.bangkit.caraka.ui.camera.CameraActivity
 
 class ScoreFragment : Fragment() {
     private lateinit var binding: FragmentScoreBinding
+    private var _binding: FragmentScoreBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,5 +43,9 @@ class ScoreFragment : Fragment() {
             view?.findNavController()?.navigate(R.id.action_scoreFragment_to_startFragment)
         }
         return binding.root
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

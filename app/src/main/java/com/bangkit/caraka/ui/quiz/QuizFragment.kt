@@ -39,7 +39,6 @@ class QuizFragment : Fragment(), View.OnClickListener {
 
         Log.i("info", mCurrentPosition.toString())
 
-
         binding.tvOptionOne.setOnClickListener(this)
         binding.tvOptionTwo.setOnClickListener(this)
         binding.tvOptionThree.setOnClickListener(this)
@@ -72,9 +71,9 @@ class QuizFragment : Fragment(), View.OnClickListener {
 
         // semua pertanyan terpenuhi
         if (mCurrentPosition == mQuestionsList.size) {
-            binding.btnSubmit.text = "Quiz Finished"
+            binding.btnSubmit.text = "Kuis Telah Selesai"
         } else {
-            binding.btnSubmit.text = "Submit"
+            binding.btnSubmit.text = "Jawab"
         }
     }
 
@@ -143,9 +142,9 @@ class QuizFragment : Fragment(), View.OnClickListener {
                     }
                     answerView(question.correctAnswer, R.drawable.correct_border)
                     if (mCurrentPosition == mQuestionsList.size) {
-                        binding.btnSubmit.text = "Finished"
+                        binding.btnSubmit.text = "Selesai"
                     } else {
-                        binding.btnSubmit.text = " Go to Next Question"
+                        binding.btnSubmit.text = "Pertanyaan Selanjutnya"
                     }
                     mSelectedPosition = 0
                 }

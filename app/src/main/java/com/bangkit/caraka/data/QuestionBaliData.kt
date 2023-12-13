@@ -10,12 +10,12 @@ object QuestionBaliData {
         val soal1 = Question(
             1,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
+            R.drawable.bali_ga_min,
             "ha",
             "na",
-            "ca",
+            "ga",
             "ra",
-            1
+            3
         )
 
         val soal2 = Question(

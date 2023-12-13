@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bangkit.caraka.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -26,11 +28,28 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.akasarabaliquiz.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToStartFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.akasarasundaquiz.setOnClickListener {
+            showToast("Fitur Ini Akan Segera Hadir")
+        }
+
+        binding.akasaralampungquiz.setOnClickListener {
+            showToast("Fitur Ini Akan Segera Hadir")
+        }
+
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
+
+    }
+    private fun showToast(message: String?) {
+        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
