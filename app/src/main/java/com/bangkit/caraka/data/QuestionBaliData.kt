@@ -21,99 +21,99 @@ object QuestionBaliData {
         val soal2 = Question(
             2,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
-            "ra",
-            3
+            R.drawable.bali_ka_min,
+            "ya",
+            "ka",
+            "nga",
+            "ba",
+            2
         )
 
         val soal3 = Question(
             3,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
-            "ra",
+            R.drawable.bali_ya_min,
+            "nga",
+            "ya",
+            "ka",
+            "pa",
             2
         )
 
         val soal4 = Question(
             4,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
+            R.drawable.bali_ra_min,
+            "ya",
+            "ba",
+            "nga",
             "ra",
-            3
+            4
         )
 
         val soal5 = Question(
             5,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
+            R.drawable.bali_ja_min,
+            "ja",
             "ha",
             "na",
-            "ca",
-            "ra",
+            "ma",
             1
         )
 
         val soal6 = Question(
             6,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
+            R.drawable.bali_ma_min,
+            "ba",
             "ra",
-            3
+            "nga",
+            "ma",
+            4
         )
 
         val soal7 = Question(
             7,
             "Apa Artinya Aksara Ini?",
             R.drawable.bali_ba_min,
-            "ha",
             "na",
-            "ca",
-            "ra",
+            "ba",
+            "nya",
+            "nga",
             2
         )
 
         val soal8 = Question(
             8,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
-            "ra",
+            R.drawable.bali_nya_min,
+            "ma",
+            "wa",
+            "ba",
+            "nya",
             4
         )
 
         val soal9 = Question(
             9,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
+            R.drawable.bali_wa_min,
             "na",
+            "ha",
+            "wa",
             "ca",
-            "ra",
             3
         )
 
         val soal10 = Question(
             10,
             "Apa Artinya Aksara Ini?",
-            R.drawable.bali_ba_min,
-            "ha",
-            "na",
-            "ca",
-            "ra",
+            R.drawable.bali_sa_min,
+            "sa",
+            "nga",
+            "ta",
+            "nya",
             1
         )
 

@@ -34,10 +34,15 @@ class ScoreFragment : Fragment() {
             view.findNavController().navigate(R.id.action_scoreFragment_to_startFragment)
         }
 
+
         binding.returnmenu.setOnClickListener {
             val intent = Intent(this.context, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
+//        val navController = findNavController()
+//        navController.navigate(R.id.action_scoreFragment_to_startFragment)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // handle back event

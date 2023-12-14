@@ -6,7 +6,10 @@ import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.data.networking.service.ApiService
 
-class AppRepository private constructor(private val service: ApiService, private val userPreference: UserPreference) {
+class AppRepository private constructor(
+    private val service: ApiService,
+    private val userPreference: UserPreference
+) {
 
     //fungsi Daftar
     suspend fun register(name: String, email: String, password: String) =

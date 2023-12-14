@@ -2,10 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_quiz"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/StartQuestionFragment">
 
     <fragment
-        android:id="@+id/startFragment"
+        android:id="@+id/StartQuestionFragment"
         android:name="com.bangkit.caraka.ui.quiz.StartQuestionFragment"
         android:label="startFragment">
         <action
@@ -26,7 +26,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_gameFragment_to_stFragment"
-            app:destination="@id/startFragment" />
+            app:destination="@id/StartQuestionFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoreFragment"
@@ -34,8 +34,8 @@
         android:label="ScoreFragment">
         <action
             android:id="@+id/action_scoreFragment_to_startFragment"
-            app:destination="@id/startFragment"
-            app:popUpTo="@id/startFragment"
+            app:destination="@id/StartQuestionFragment"
+            app:popUpTo="@id/StartQuestionFragment"
             app:popUpToInclusive="true" />
         <argument
             android:name="score"

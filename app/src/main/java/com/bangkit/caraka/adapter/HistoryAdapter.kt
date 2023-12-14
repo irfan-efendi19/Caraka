@@ -1,6 +1,5 @@
 package com.bangkit.caraka.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,10 +7,11 @@ import coil.load
 import com.bangkit.caraka.data.networking.response.ListStoryItem
 import com.bangkit.caraka.databinding.ItemHistoryBinding
 
-class HistoryAdapter (private val listItem: List<ListStoryItem>) :
+class HistoryAdapter(private val listItem: List<ListStoryItem>) :
     RecyclerView.Adapter<HistoryAdapter.MyViewHolder>() {
 
-    class MyViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: ItemHistoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ListStoryItem) {
             binding.apply {
                 ivItemPhoto.load(item.photoUrl)
