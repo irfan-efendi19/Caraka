@@ -2,7 +2,7 @@ package com.bangkit.caraka.data
 
 import com.bangkit.caraka.R
 
-object QuestionBaliData {
+object AksaraBaliData {
 
     fun getQuestionQuestionBali(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()
@@ -129,6 +129,32 @@ object QuestionBaliData {
         questionsList.add(soal10)
 
         return questionsList
+    }
+
+    fun getAksaraKamus(): List<Kamus> {
+        return listOf(
+            Kamus(1, 1, R.drawable.bali_ha_min, "Ha"),
+            Kamus(2, 1, R.drawable.bali_na_min, "Na"),
+            Kamus(3, 1, R.drawable.bali_ca_min, "Ca"),
+            Kamus(4, 1, R.drawable.bali_ra_min, "Ra"),
+            Kamus(5, 1, R.drawable.bali_ka_min, "Ka"),
+
+            Kamus(6, 1, R.drawable.bali_da_min, "Da"),
+            Kamus(7, 1, R.drawable.bali_ta_min, "Ta"),
+            Kamus(8, 1, R.drawable.bali_sa_min, "Sa"),
+            Kamus(9, 1, R.drawable.bali_wa_min, "Wa"),
+            Kamus(10, 1, R.drawable.bali_la_min, "La"),
+
+            Kamus(11, 1, R.drawable.bali_ma_min, "Ma"),
+            Kamus(12, 1, R.drawable.bali_ga_min, "Ga"),
+            Kamus(13, 1, R.drawable.bali_ba_min, "Ba"),
+            Kamus(14, 1, R.drawable.bali_nga_min, "Nga"),
+            Kamus(15, 1, R.drawable.bali_pa_min, "Pa"),
+
+            Kamus(16, 1, R.drawable.bali_ja_min, "Ja"),
+            Kamus(17, 1, R.drawable.bali_ya_min, "Ya"),
+            Kamus(18, 1, R.drawable.bali_nya_min, "Nya"),
+        )
     }
 
 }

@@ -15,9 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.caraka.R
 import com.bangkit.caraka.data.Question
-import com.bangkit.caraka.data.QuestionBaliData
+import com.bangkit.caraka.data.AksaraBaliData
 import com.bangkit.caraka.databinding.FragmentQuizBinding
-import com.bangkit.caraka.databinding.FragmentScoreBinding
 
 
 class QuizFragment : Fragment(), View.OnClickListener {
@@ -36,7 +35,7 @@ class QuizFragment : Fragment(), View.OnClickListener {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz, container, false)
 
-        mQuestionsList = QuestionBaliData.getQuestionQuestionBali()
+        mQuestionsList = AksaraBaliData.getQuestionQuestionBali()
 
         Log.i("info", mCurrentPosition.toString())
 

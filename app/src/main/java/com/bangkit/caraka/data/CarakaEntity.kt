@@ -10,3 +10,10 @@ data class Question(
     val optionFour: String,
     val correctAnswer: Int,
 )
+
+data class Kamus(
+    val id: Int,
+    val kamusBelajarId: Int,
+    val aksara: Int,
+    val latin: String,
+)

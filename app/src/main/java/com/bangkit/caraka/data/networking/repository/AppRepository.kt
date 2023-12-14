@@ -39,6 +39,7 @@ class AppRepository private constructor(
     //fungsi mendapatkan detail
     suspend fun getDetailStory(id: String) = service.getDetailStory(id)
 
+
     companion object {
         @Volatile
         private var instance: AppRepository? = null

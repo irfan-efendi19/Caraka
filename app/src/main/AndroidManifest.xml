@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Caraka"
         tools:targetApi="31">
         <activity
+            android:name=".ui.kamus.KamusActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.camera.ScannerActivity"
             android:exported="false" />
         <activity
