@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
         binding.akasarabaliquiz.setOnClickListener {
             val fragmentB = StartQuestionFragment()
-            activity?.getSupportFragmentManager()?.beginTransaction()
+            activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.StartQuestionFragment, fragmentB, "fragmentId")?.commit();
 //            val action = HomeFragmentDirections.actionHomeFragmentToStartQuestionFragment()
 //            findNavController().navigate(action)
