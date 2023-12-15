@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.FragmentHomeBinding
+import com.bangkit.caraka.ui.quiz.QuizActivity
 import com.bangkit.caraka.ui.quiz.StartQuestionFragment
 
 class HomeFragment : Fragment() {
@@ -31,9 +32,11 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.akasarabaliquiz.setOnClickListener {
-            val fragmentB = StartQuestionFragment()
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.StartQuestionFragment, fragmentB, "fragmentId")?.commit();
+            val intent = Intent(requireContext(), QuizActivity::class.java)
+            startActivity(intent)
+//            val fragmentB = StartQuestionFragment()
+//            activity?.supportFragmentManager?.beginTransaction()
+//                ?.replace(R.id.StartQuestionFragment, fragmentB, "fragmentId")?.commit();
 //            val action = HomeFragmentDirections.actionHomeFragmentToStartQuestionFragment()
 //            findNavController().navigate(action)
         }
