@@ -1,6 +1,12 @@
-package com.bangkit.caraka.data
+package com.bangkit.caraka.data.database
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity
 data class Question(
+    @PrimaryKey
     val id: Int,
     val question: String,
     val image: Int,
@@ -11,9 +17,12 @@ data class Question(
     val correctAnswer: Int,
 )
 
+
+@Entity
 data class Kamus(
+    @PrimaryKey
     val id: Int,
-    val kamusBelajarId: Int,
+    val kamusId: Int,
     val aksara: Int,
     val latin: String,
 )

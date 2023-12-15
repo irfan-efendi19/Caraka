@@ -1,8 +1,10 @@
-package com.bangkit.caraka.data
+package com.bangkit.caraka.data.dummydata
 
 import com.bangkit.caraka.R
+import com.bangkit.caraka.data.database.Kamus
+import com.bangkit.caraka.data.database.Question
 
-object AksaraBaliData {
+object DummyDataAksara {
 
     fun getQuestionQuestionBali(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.bangkit.caraka.data.Kamus
+import com.bangkit.caraka.data.database.Kamus
 import com.bangkit.caraka.databinding.ItemAksaraBinding
 import com.bangkit.caraka.databinding.ItemHistoryBinding
 

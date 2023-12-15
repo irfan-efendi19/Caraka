@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.data.di.Injection
 import com.bangkit.caraka.data.networking.repository.AppRepository
 import com.bangkit.caraka.ui.history.HistoryViewModel
+import com.bangkit.caraka.ui.kamus.KamusViewModel
 
 class ViewModelFactory(private val repository: AppRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -14,6 +15,9 @@ class ViewModelFactory(private val repository: AppRepository) : ViewModelProvide
         return when {
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(KamusViewModel::class.java) -> {
+                KamusViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
