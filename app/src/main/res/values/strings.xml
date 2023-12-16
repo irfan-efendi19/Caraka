@@ -56,17 +56,14 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
 
-    <string name="onboarding_slide1_title"></string>
-    <string name="onboarding_slide1_subtitle">CARAKA App</string>
-    <string name="onboarding_slide1_desc">LESTARIKAN BUDAYA MELALUI AKSARA TRADISIONAL</string>
 
-    <string name="onboarding_slide2_title">Login to your account</string>
-    <string name="onboarding_slide2_subtitle">BELAJAR DAN MENGASAH KEMAMPUAN AKSARA</string>
-    <string name="onboarding_slide2_desc"></string>
+    <string name="onboarding_slide1_desc"> </string>
+    <string name="onboarding_slide2_desc">indonesia memiliki xxx pulau dan memiliki budaya yang beragam</string>
+    <string name="onboarding_slide3_desc">"apakah kamu tau indonesia memiliki 12 aksara yang merupakan bagian dari kekayaan kesusastraan dan budaya Indonesia"</string>
+    <string name="onboarding_slide4_desc">"tapi saat ini budaya tersebut terancam punah lohh :("</string>
+    <string name="onboarding_slide5_desc">"ingin menjadi bagian dalam melestarikan budaya indonesia?"</string>
 
-    <string name="onboarding_slide3_title">Login to your account</string>
-    <string name="onboarding_slide3_subtitle">SCAN FOTO UNTUK MENERJEMAHKAN AKSARA DENGAN AKURAT</string>
-    <string name="onboarding_slide3_desc"></string>
+
     <string name="skip">Lewati</string>
     <string name="get_started">Mulai Perjalanan Anda</string>
 

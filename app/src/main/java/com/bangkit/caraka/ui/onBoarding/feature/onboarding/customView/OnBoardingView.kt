@@ -23,7 +23,7 @@ constructor(
 ) :
     FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
-    private val numberOfPages by lazy { OnBoardingPage.values().size }
+    private val numberOfPages by lazy { OnBoardingPage.entries.size }
     private val prefManager: OnBoardingPrefManager
 
 

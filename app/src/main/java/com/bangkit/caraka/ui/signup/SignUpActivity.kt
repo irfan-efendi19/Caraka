@@ -85,7 +85,7 @@ class SignUpActivity : AppCompatActivity() {
 
                                     is ResultData.Success -> {
                                         showLoading(false)
-                                        showToast("")
+                                        showToast("Berhasil Mendaftar Akun")
                                         val intent =
                                             Intent(this@SignUpActivity, SignInActivity::class.java)
                                         intent.flags =

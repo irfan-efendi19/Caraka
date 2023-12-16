@@ -36,10 +36,8 @@ class OnBoardingPagerAdapter(private val onBoardingPageList: Array<OnBoardingPag
      * bind view **/
         fun bind(onBoardingPage: OnBoardingPage) {
             val res = binding.root.context.resources
-            binding.titleTv.text = res.getString(onBoardingPage.titleResource)
-            binding.subTitleTv.text = res.getString(onBoardingPage.subTitleResource)
             binding.descTV.text = res.getString(onBoardingPage.descriptionResource)
-            binding.img.setImageResource(onBoardingPage.logoResource)
+            binding.img.setAnimation(onBoardingPage.logoResource)
         }
 
     }
