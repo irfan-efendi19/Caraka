@@ -1,6 +1,5 @@
 package com.bangkit.caraka.data.networking.service
 
-import com.bangkit.caraka.data.di.RegisterResponse
 import com.bangkit.caraka.data.networking.response.DetailHistory
 import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.data.networking.response.LoginResponse

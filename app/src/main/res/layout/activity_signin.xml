@@ -7,7 +7,7 @@
     tools:context=".ui.signin.SignInActivity">
 
     <ProgressBar
-        android:id="@+id/progress_bar_signup"
+        android:id="@+id/progress_bar_signin"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"

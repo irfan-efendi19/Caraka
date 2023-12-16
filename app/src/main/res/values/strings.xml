@@ -9,12 +9,15 @@
     <string name="title_activity_home">Caraka</string>
     <string name="title_home">Beranda</string>
     <string name="title_profile">Profil</string>
+    <string name="title_history">Sejarah</string>
+    <string name="title_translate">Terjemahan</string>
     <string name="title_activity_detail_history">DetailHistoryActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Lanjut</string>
     <string name="previous">Sebelumnya</string>
+    <string name="comingsoon">Fitur ini akan segera hadir!</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

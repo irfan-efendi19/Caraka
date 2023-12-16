@@ -9,9 +9,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.caraka.databinding.OnboardingViewBinding
 import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.onBoarding.animation.setParallaxTransformation
-import com.bangkit.caraka.ui.onboarding.prefmanager.OnBoardingPrefManager
+import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingPagerAdapter
-import com.bangkit.caraka.ui.onboarding.feature.onboarding.entity.OnBoardingPage
+import com.bangkit.caraka.ui.onBoarding.feature.onboarding.entity.OnBoardingPage
+import com.bangkit.caraka.ui.signup.SignUpActivity
 
 class OnBoardingView @JvmOverloads
 constructor(
@@ -75,11 +76,11 @@ constructor(
         nextBtn.setOnClickListener { navigateToNextSlide(slider) }
         skipBtn.setOnClickListener {
             setFirstTimeLaunchToFalse()
-            context.startActivity(Intent(context, HomeActivity::class.java))
+            context.startActivity(Intent(context, SignUpActivity::class.java))
         }
         startBtn.setOnClickListener {
             setFirstTimeLaunchToFalse()
-            context.startActivity(Intent(context, HomeActivity::class.java))
+            context.startActivity(Intent(context, SignUpActivity::class.java))
         }
     }
 

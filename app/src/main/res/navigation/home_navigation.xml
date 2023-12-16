@@ -11,6 +11,19 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.bangkit.caraka.ui.bottom_menu.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
+
+
+    <fragment
+        android:id="@+id/navigation_terjemahan"
+        android:name="com.bangkit.caraka.ui.bottom_menu.terjemahan.TerjemahanFragment"
+        android:label="@string/title_translate"
+        tools:layout="@layout/fragment_terjemahan" />
+
 
     <fragment
         android:id="@+id/navigation_profile"

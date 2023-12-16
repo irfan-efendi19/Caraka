@@ -51,11 +51,15 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Live Data
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     //navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
@@ -91,12 +95,11 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.6.1")
     ksp ("androidx.room:room-compiler:2.6.1")
 
-    //TensorFlow
-    implementation("org.tensorflow:tensorflow-lite-gpu:2.13.0")
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
-
     //Camera
     implementation ("androidx.camera:camera-camera2:1.3.0")
     implementation ("androidx.camera:camera-lifecycle:1.3.0")
     implementation ("androidx.camera:camera-view:1.3.0")
+
+    //Lottie
+    implementation ("com.airbnb.android:lottie:6.0.0")
 }

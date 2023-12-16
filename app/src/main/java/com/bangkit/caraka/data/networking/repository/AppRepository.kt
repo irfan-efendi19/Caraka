@@ -7,13 +7,15 @@ import com.bangkit.caraka.data.ResultData
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
-import com.bangkit.caraka.data.di.RegisterResponse
-import com.bangkit.caraka.data.networking.userPreference.User
 import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.data.networking.response.HistoryResponse
+import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.networking.response.SignupResponse
-import com.bangkit.caraka.data.networking.service.ApiConfig
 import com.bangkit.caraka.data.networking.service.ApiService
+import com.bangkit.caraka.data.preference.UserModel
+import com.google.gson.Gson
+import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 
 class AppRepository private constructor(
     private val carakaDao: CarakaDao,
@@ -35,10 +37,17 @@ class AppRepository private constructor(
         }
     }
 
-
-    //fungsi login
-    suspend fun login(email: String, password: String) =
-        apiService.login(email, password)
+    suspend fun login(email: String, password: String): LiveData<ResultData<LoginResponse>> = liveData {
+        emit(ResultData.Loading)
+        try {
+            val response = apiService.login(email, password)
+            emit(ResultData.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, LoginResponse::class.java)
+            emit(ResultData.Error(errorBody.message.toString()))
+        }
+    }
 
     //mendapatkan stories
     suspend fun getStories(): HistoryResponse =
@@ -46,15 +55,18 @@ class AppRepository private constructor(
 
 
     //fungsi menyimpan preference key
-    suspend fun saveSession(user: User) =
+    suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
+    }
 
     //mendapatkan sesi
-    fun getSession() = userPreference.getSession().asLiveData()
+    fun getSession(): Flow<UserModel> {
+        return userPreference.getSession()
+    }
 
     //fungsi logout
     suspend fun logout() {
-        userPreference.logout()
+        userPreference.logOut()
     }
 
     //fungsi mendapatkan detail

@@ -15,9 +15,7 @@ class MainViewModel(private val appRepository: AppRepository) : ViewModel() {
         appRepository.insertAllData()
     }
 
-    suspend fun register(email: String, name: String, password: String) =
-        appRepository.register(email, name, password)
-
-    suspend fun login(email: String, password: String) =
-        appRepository.login(email, password)
+    suspend fun logout() {
+        appRepository.logout()
+    }
 }

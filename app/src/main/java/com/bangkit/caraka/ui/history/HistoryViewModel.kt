@@ -8,13 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.caraka.data.networking.userPreference.User
 import com.bangkit.caraka.data.networking.repository.AppRepository
 import com.bangkit.caraka.data.networking.response.HistoryResponse
+import com.bangkit.caraka.data.preference.UserModel
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val appRepository: AppRepository): ViewModel() {
 
-        fun getSession(): LiveData<User> {
-            return appRepository.getSession()
-        }
+//        fun getSession(): LiveData<UserModel> {
+//            return appRepository.getSession()
+//        }
 
         fun logout() {
             viewModelScope.launch {

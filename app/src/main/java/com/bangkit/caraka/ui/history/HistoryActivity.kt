@@ -29,27 +29,27 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel(){
-        historyViewModel.getSession().observe(this){ user ->
-            Log.d(TAG, "user: ${user.name}")
-            Log.d(TAG, "isLogin: ${user.isLogin}")
-            Log.d(TAG, "Token: ${user.token}")
-
-            if (user.isLogin) {
-                binding.root.visibility = View.VISIBLE
-                ApiConfig.token = user.token
-                Log.d(TAG, "try to fetch data")
-                historyViewModel.fetchHistory()
-                historyViewModel.historyLiveData.observe(this){
-                    val adapter = HistoryAdapter(it.listStory)
-                    binding.rvSejarahActivity.layoutManager = LinearLayoutManager(this)
-                    binding.rvSejarahActivity.adapter = adapter
-                }
-
-            } else {
-                Log.d(TAG, "Tidak Ada User")
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
-            }
-        }
+//        historyViewModel.getSession().observe(this){ user ->
+//            Log.d(TAG, "user: ${user.name}")
+//            Log.d(TAG, "isLogin: ${user.isLogin}")
+//            Log.d(TAG, "Token: ${user.token}")
+//
+//            if (user.isLogin) {
+//                binding.root.visibility = View.VISIBLE
+//                ApiConfig.token = user.token
+//                Log.d(TAG, "try to fetch data")
+//                historyViewModel.fetchHistory()
+//                historyViewModel.historyLiveData.observe(this){
+//                    val adapter = HistoryAdapter(it.listStory)
+//                    binding.rvSejarahActivity.layoutManager = LinearLayoutManager(this)
+//                    binding.rvSejarahActivity.adapter = adapter
+//                }
+//
+//            } else {
+//                Log.d(TAG, "Tidak Ada User")
+//                startActivity(Intent(this, SignInActivity::class.java))
+//                finish()
+//            }
+//        }
     }
 }

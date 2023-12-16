@@ -37,6 +37,12 @@ class SignUpActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+
+        binding.signinButton.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun setupView() {
