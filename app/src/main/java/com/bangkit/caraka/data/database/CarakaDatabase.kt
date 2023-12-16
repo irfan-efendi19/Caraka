@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Question::class, Kamus::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class CarakaDatabase: RoomDatabase() {

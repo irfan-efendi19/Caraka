@@ -34,11 +34,6 @@ class HomeFragment : Fragment() {
         binding.akasarabaliquiz.setOnClickListener {
             val intent = Intent(requireContext(), QuizActivity::class.java)
             startActivity(intent)
-//            val fragmentB = StartQuestionFragment()
-//            activity?.supportFragmentManager?.beginTransaction()
-//                ?.replace(R.id.StartQuestionFragment, fragmentB, "fragmentId")?.commit();
-//            val action = HomeFragmentDirections.actionHomeFragmentToStartQuestionFragment()
-//            findNavController().navigate(action)
         }
 
         binding.akasarasundaquiz.setOnClickListener {

@@ -2,31 +2,47 @@ package com.bangkit.caraka.data.networking.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
+import com.bangkit.caraka.data.ResultData
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
+import com.bangkit.caraka.data.di.RegisterResponse
 import com.bangkit.caraka.data.networking.userPreference.User
 import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.data.networking.response.HistoryResponse
+import com.bangkit.caraka.data.networking.response.SignupResponse
+import com.bangkit.caraka.data.networking.service.ApiConfig
 import com.bangkit.caraka.data.networking.service.ApiService
 
 class AppRepository private constructor(
     private val carakaDao: CarakaDao,
-    private val service: ApiService,
+    private val apiService: ApiService,
     private val userPreference: UserPreference
 ) {
 
-    //fungsi Daftar
-    suspend fun register(name: String, email: String, password: String) =
-        service.register(name, email, password)
+    suspend fun register(
+        name: String,
+        email: String,
+        password: String
+    ): LiveData<ResultData<SignupResponse>> = liveData {
+        emit(ResultData.Loading)
+        val response = apiService.register(name, email, password)
+        if (!response.error) {
+            emit(ResultData.Success(response))
+        } else {
+            emit(ResultData.Error(response.message))
+        }
+    }
+
 
     //fungsi login
     suspend fun login(email: String, password: String) =
-        service.login(email, password)
+        apiService.login(email, password)
 
     //mendapatkan stories
     suspend fun getStories(): HistoryResponse =
-        service.getStories()
+        apiService.getStories()
 
 
     //fungsi menyimpan preference key
@@ -42,7 +58,7 @@ class AppRepository private constructor(
     }
 
     //fungsi mendapatkan detail
-    suspend fun getDetailStory(id: String) = service.getDetailStory(id)
+    suspend fun getDetailStory(id: String) = apiService.getDetailStory(id)
 
     fun getKamus(aksaraId: Int): LiveData<List<Kamus>> = carakaDao.getAllKamus(aksaraId)
 
@@ -52,6 +68,11 @@ class AppRepository private constructor(
 
 
     companion object {
+
+        fun clearInstance() {
+            instance = null
+        }
+
         @Volatile
         private var instance: AppRepository? = null
         fun getInstance(
