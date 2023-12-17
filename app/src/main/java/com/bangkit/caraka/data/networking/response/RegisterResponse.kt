@@ -1,4 +1,4 @@
-package com.bangkit.caraka.data.di
+package com.bangkit.caraka.data.networking.response
 
 import com.google.gson.annotations.SerializedName
 

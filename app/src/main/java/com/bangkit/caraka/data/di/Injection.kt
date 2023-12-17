@@ -6,6 +6,7 @@ import com.bangkit.caraka.data.networking.repository.AppRepository
 import com.bangkit.caraka.data.networking.service.ApiConfig
 import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.data.networking.userPreference.dataStore
+import com.bangkit.caraka.ui.bottom_menu.profile.ProfileFragment
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 

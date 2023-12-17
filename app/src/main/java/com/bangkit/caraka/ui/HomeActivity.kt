@@ -14,8 +14,6 @@ import com.bangkit.caraka.databinding.ActivityHomeBinding
 import com.bangkit.caraka.ui.camera.CameraActivity
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
-import com.bangkit.caraka.ui.signin.SignInActivity
-import com.bangkit.caraka.ui.signup.SignUpActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 

@@ -1,16 +1,19 @@
 package com.bangkit.caraka.ui.bottom_menu.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.bangkit.caraka.data.ResultData
-import com.bangkit.caraka.data.networking.userPreference.User
-import com.bangkit.caraka.data.preference.UserModel
+import androidx.lifecycle.lifecycleScope
 import com.bangkit.caraka.databinding.FragmentProfileBinding
+import com.bangkit.caraka.ui.ViewModelFactory
+import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
+import com.bangkit.caraka.ui.signin.SignInActivity
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -19,29 +22,56 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var usernameTextView: TextView
+
+    private val viewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this)[ProfileViewModel::class.java]
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnLogout.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.logout()
+            }
+            startActivity(Intent(this.context, SignInActivity::class.java))
         }
 
-        return root
+        // Assuming you have obtained the token from somewhere
+//        val token = "YOUR_TOKEN_HERE"
+//
+//        // Create an instance of ApiService using ApiConfig
+//        apiService = ApiConfig.getApiService(token)
+//
+//        // Make a network request
+//        val call: Call<UserModel> = apiService.getUserData()
+//
+//        call.enqueue(object : Callback<UserModel> {
+//            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+//                if (response.isSuccessful) {
+//                    val userModel = response.body()
+//
+//                    // Update the TextViews with data from the UserModel response
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+//                // Handle network request failure
+//            }
+//        })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

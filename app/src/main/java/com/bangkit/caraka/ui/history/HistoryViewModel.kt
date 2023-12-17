@@ -13,27 +13,4 @@ import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val appRepository: AppRepository): ViewModel() {
 
-//        fun getSession(): LiveData<UserModel> {
-//            return appRepository.getSession()
-//        }
-
-        fun logout() {
-            viewModelScope.launch {
-                appRepository.logout()
-            }
-        }
-
-    private val _historyLiveData = MutableLiveData<HistoryResponse>()
-    val historyLiveData: LiveData<HistoryResponse> = _historyLiveData
-
-    fun fetchHistory() {
-        viewModelScope.launch {
-            try {
-                val historyResponse: HistoryResponse = appRepository.getStories()
-                _historyLiveData.value = historyResponse
-            } catch (e: Exception) {
-                Log.d("ViewModel", e.message.toString())
-            }
-        }
-    }
 }

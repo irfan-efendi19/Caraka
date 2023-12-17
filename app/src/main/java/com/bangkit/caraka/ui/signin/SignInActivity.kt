@@ -10,7 +10,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bangkit.caraka.R
 import com.bangkit.caraka.data.ResultData
 import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.preference.UserModel
@@ -81,7 +80,7 @@ class SignInActivity : AppCompatActivity() {
 
                                     is ResultData.Success -> {
                                         showLoading(false)
-                                        showToast("Login berhasil!")
+                                        showToast("Berhasil Masuk!")
                                         lifecycleScope.launch {
                                             save(
                                                 UserModel(
@@ -99,7 +98,9 @@ class SignInActivity : AppCompatActivity() {
                                         showToast(result.error)
                                     }
 
-                                    else -> {}
+                                    else -> {
+
+                                    }
                                 }
                             }
                         }

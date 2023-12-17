@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.data.di.Injection
 import com.bangkit.caraka.data.networking.repository.AppRepository
+import com.bangkit.caraka.ui.bottom_menu.profile.ProfileViewModel
 import com.bangkit.caraka.ui.history.HistoryViewModel
 import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.ui.signin.SignInViewModel
@@ -23,6 +24,10 @@ class ViewModelFactory(private val repository: AppRepository) :
 
             modelClass.isAssignableFrom(SignInViewModel::class.java) -> {
                 SignInViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
             }
 
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {

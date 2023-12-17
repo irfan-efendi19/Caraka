@@ -11,8 +11,4 @@ class HomeViewModel(private val repository: AppRepository) : ViewModel() {
         return repository.getSession().asLiveData()
     }
 
-    suspend fun logout() {
-        repository.logout()
-    }
-
 }
