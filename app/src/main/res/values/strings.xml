@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Caraka</string>
-    <string name="password_length">Password has to contain at least 8 character</string>
+    <string name="password_length">Kata sandi harus mengandung minimal 8 karakter</string>
+    <string name="email_requare">E-Mail tidak valid</string>
     <string name="password">Password</string>
     <string name="e_mail">E-Mail</string>
     <string name="title_message_signin">Daftarkan Akun Anda</string>

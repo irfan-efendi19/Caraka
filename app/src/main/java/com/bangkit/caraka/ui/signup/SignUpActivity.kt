@@ -89,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                                         showLoading(false)
                                         showToast("Berhasil Mendaftar Akun")
                                         val intent =
-                                            Intent(this@SignUpActivity, HomeActivity::class.java)
+                                            Intent(this@SignUpActivity, SignInActivity::class.java)
                                         intent.flags =
                                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                         startActivity(intent)

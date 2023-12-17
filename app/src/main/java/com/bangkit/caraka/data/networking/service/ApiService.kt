@@ -13,15 +13,15 @@ import retrofit2.http.Path
 
 interface ApiService {
     @FormUrlEncoded
-    @POST("register")
+    @POST("/auth/register")
     suspend fun register(
-        @Field("name") name: String,
+        @Field("nama") name: String,
         @Field("email") email: String,
         @Field("password") password: String
     ): SignupResponse
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("/auth/login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String,

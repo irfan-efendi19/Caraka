@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.caraka.data.ResultData
+import com.bangkit.caraka.data.networking.userPreference.User
+import com.bangkit.caraka.data.preference.UserModel
 import com.bangkit.caraka.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -16,6 +19,7 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var usernameTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +36,7 @@ class ProfileFragment : Fragment() {
         notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
         return root
     }
 

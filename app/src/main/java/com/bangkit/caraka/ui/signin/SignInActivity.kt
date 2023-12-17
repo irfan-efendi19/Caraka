@@ -67,9 +67,9 @@ class SignInActivity : AppCompatActivity() {
                 val password = binding.passwordEditText.text.toString()
 
                 if (email.isEmpty()) {
-                    binding.emailEditText.error = ""
+                    binding.emailEditText.error = "Email Tidak Boleh Kosong"
                 } else if (password.isEmpty()) {
-                    binding.passwordEditText.error = ""
+                    binding.passwordEditText.error = "Password Tidak Boleh Kosong"
                 } else {
                     lifecycleScope.launch {
                         viewModel.login(email, password).observe(this@SignInActivity) { result ->

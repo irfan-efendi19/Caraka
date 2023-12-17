@@ -37,7 +37,7 @@ class CustomEmailEditText : AppCompatEditText {
                     error = null
                 }
                 else {
-                    setError(context.getString(R.string.password_length), null)
+                    setError(context.getString(R.string.email_requare), null)
                 }
             }
 
