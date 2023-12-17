@@ -59,8 +59,13 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, CameraActivity::class.java)
             startActivity(intent)
         }
+
+
         getSession()
     }
+
+
+
 
     //fungsi mencek apakah aplikasi pertama kali diluncurkan atau tidak
     private fun checkIsFirstTimeLaunch(): Boolean {

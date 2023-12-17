@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.FragmentHomeBinding
+import com.bangkit.caraka.ui.kamus.KamusActivity
 import com.bangkit.caraka.ui.quiz.QuizActivity
 import com.bangkit.caraka.ui.quiz.StartQuestionFragment
 
@@ -33,6 +34,11 @@ class HomeFragment : Fragment() {
 
         binding.akasarabaliquiz.setOnClickListener {
             val intent = Intent(requireContext(), QuizActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.akasarabalikamus.setOnClickListener {
+            val intent = Intent(requireContext(), KamusActivity::class.java)
             startActivity(intent)
         }
 
