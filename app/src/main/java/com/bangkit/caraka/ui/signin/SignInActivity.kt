@@ -17,6 +17,7 @@ import com.bangkit.caraka.data.preference.UserModel
 import com.bangkit.caraka.databinding.ActivitySigninBinding
 import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.ViewModelFactory
+import com.bangkit.caraka.ui.signup.SignUpActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -35,9 +36,15 @@ class SignInActivity : AppCompatActivity() {
         _binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
         showLoading(false)
         setupAction()
         setupView()
+
+        binding.signupButton.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupView() {

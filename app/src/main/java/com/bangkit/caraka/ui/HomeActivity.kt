@@ -14,6 +14,8 @@ import com.bangkit.caraka.databinding.ActivityHomeBinding
 import com.bangkit.caraka.ui.camera.CameraActivity
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
+import com.bangkit.caraka.ui.signin.SignInActivity
+import com.bangkit.caraka.ui.signup.SignUpActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
@@ -33,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
         onBoardingPrefManager = OnBoardingPrefManager(this)
 
         if (checkIsFirstTimeLaunch()) {
@@ -79,9 +82,15 @@ class HomeActivity : AppCompatActivity() {
 //                        adapter.submitData(lifecycle, result)
 //                        showLoading(false)
 //                    }
+                    showLoading(false)
                 }
             }
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) binding.progressBarMain.visibility = View.VISIBLE
+        else binding.progressBarMain.visibility = View.GONE
     }
 
 }

@@ -15,6 +15,7 @@ import com.bangkit.caraka.data.ResultData
 import com.bangkit.caraka.data.di.RegisterResponse
 import com.bangkit.caraka.databinding.ActivitySignUpBinding
 import com.bangkit.caraka.databinding.FragmentHomeBinding
+import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.signin.SignInActivity
 import com.google.gson.Gson
@@ -33,8 +34,9 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
         showLoading(false)
-
+        supportActionBar?.hide()
         setupView()
         setupAction()
 
@@ -66,11 +68,11 @@ class SignUpActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString()
 
             if (name.isEmpty()) {
-                binding.nameEditTextLayout.error = ""
+                binding.nameEditTextLayout.error = "Nama Tidak Boleh Kosong"
             } else if (email.isEmpty()) {
-                binding.emailEditTextLayout.error = ""
+                binding.emailEditTextLayout.error = "Email Tidak Boleh Kosong"
             } else if (password.isEmpty()) {
-                binding.passwordEditTextLayout.error = ""
+                binding.passwordEditTextLayout.error = "Password Tidak Boleh Kosong"
             }
 
             lifecycleScope.launch {
@@ -87,7 +89,7 @@ class SignUpActivity : AppCompatActivity() {
                                         showLoading(false)
                                         showToast("Berhasil Mendaftar Akun")
                                         val intent =
-                                            Intent(this@SignUpActivity, SignInActivity::class.java)
+                                            Intent(this@SignUpActivity, HomeActivity::class.java)
                                         intent.flags =
                                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                         startActivity(intent)

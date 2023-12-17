@@ -12,7 +12,16 @@ import com.bangkit.caraka.databinding.ActivityQuizBinding
 class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityQuizBinding = DataBindingUtil.setContentView(this, R.layout.activity_quiz)
+        val binding: ActivityQuizBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_quiz)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Kuis Aksara"
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        finish()
+        return true
     }
 }

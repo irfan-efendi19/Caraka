@@ -9,7 +9,7 @@ import com.bangkit.caraka.ui.onBoarding.feature.onboarding.entity.OnBoardingPage
 /**
  *OnBoardingPagerAdapter adapter for the viewpager2
  *  @param onBoardingPageList as Array */
-class OnBoardingPagerAdapter(private val onBoardingPageList: Array<OnBoardingPage> = OnBoardingPage.values()) :
+class OnBoardingPagerAdapter(private val onBoardingPageList: Array<OnBoardingPage> = OnBoardingPage.entries.toTypedArray()) :
     RecyclerView.Adapter<OnBoardingPagerAdapter.PagerViewHolder>() {
 
 
