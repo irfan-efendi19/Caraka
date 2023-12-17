@@ -44,12 +44,7 @@ class HomeFragment : Fragment() {
             showToast("Fitur Ini Akan Segera Hadir")
         }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
-
     }
 
     private fun showToast(message: String?) {

@@ -5,4 +5,5 @@
     <color name="brown">#9C9C9C</color>
     <color name="bgcardscore">#596275</color>
     <color name="bgquestioncard">#f3a683</color>
+    <color name="darkbrown">#f3a683</color>
 </resources>
