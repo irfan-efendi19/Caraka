@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/iconhistory"
         android:title="@string/title_history" />
 
     <item
@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_terjemahan"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/icon_translate_black"
         android:title="@string/title_translate" />
 
     <item
