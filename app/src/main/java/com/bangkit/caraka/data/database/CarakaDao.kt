@@ -12,6 +12,6 @@ interface CarakaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertKamus(kamus: List<Kamus>)
 
-    @Query("SELECT * from kamus WHERE id = :aksaraId")
+    @Query("SELECT * from kamus WHERE kamusId = :aksaraId")
     fun getAllKamus(aksaraId: Int): LiveData<List<Kamus>>
 }

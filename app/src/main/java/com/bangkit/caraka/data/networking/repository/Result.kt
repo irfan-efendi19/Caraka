@@ -1,4 +1,4 @@
-package com.bangkit.caraka.data
+package com.bangkit.caraka.data.networking.repository
 
 sealed class ResultData<out R> private constructor() {
     data class Success<out T>(val data: T) : ResultData<T>()

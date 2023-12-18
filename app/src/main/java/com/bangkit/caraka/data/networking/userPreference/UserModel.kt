@@ -1,4 +1,4 @@
-package com.bangkit.caraka.data.preference
+package com.bangkit.caraka.data.networking.userPreference
 
 data class UserModel(
     val token: String,

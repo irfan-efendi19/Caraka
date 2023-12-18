@@ -1,9 +1,7 @@
 package com.bangkit.caraka.data.networking.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.bangkit.caraka.data.ResultData
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
@@ -12,7 +10,7 @@ import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.networking.response.SignupResponse
 import com.bangkit.caraka.data.networking.service.ApiService
-import com.bangkit.caraka.data.preference.UserModel
+import com.bangkit.caraka.data.networking.userPreference.UserModel
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException

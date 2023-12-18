@@ -14,7 +14,7 @@ class KamusActivity : AppCompatActivity() {
     private var _binding: ActivityKamusBinding? = null
     private val binding get() = _binding!!
     private lateinit var kamusViewModel: KamusViewModel
-    private var kamusBelajarId = 0
+    private var kamusBelajarId = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +28,18 @@ class KamusActivity : AppCompatActivity() {
         kamusViewModel = ViewModelProvider(this, viewModelFactory)[KamusViewModel::class.java]
 
         kamusViewModel.getKamus(kamusBelajarId).observe(this) {
-            if (it.isNotEmpty()) {
-                showRV(it)
-            }
+            setupListKamus(it)
         }
     }
 
-    private fun showRV(listKamus: List<Kamus>) {
-        val layoutManager = GridLayoutManager(this@KamusActivity, 5)
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        finish()
+        return true
+    }
+
+    private fun setupListKamus(listKamus: List<Kamus>) {
+        val layoutManager = GridLayoutManager(this, 5)
         binding.rvKamusdetail.layoutManager = layoutManager
         val adapter = KamusAdapter(listKamus)
         binding.rvKamusdetail.adapter = adapter

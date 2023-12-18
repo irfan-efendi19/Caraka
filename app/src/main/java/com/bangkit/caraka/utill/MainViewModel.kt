@@ -14,8 +14,4 @@ class MainViewModel(private val appRepository: AppRepository) : ViewModel() {
     private fun insertAllData() = viewModelScope.launch {
         appRepository.insertAllData()
     }
-
-    suspend fun logout() {
-        appRepository.logout()
-    }
 }

@@ -1,5 +1,6 @@
 package com.bangkit.caraka.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,27 +9,32 @@ import com.bangkit.caraka.data.database.Kamus
 import com.bangkit.caraka.databinding.ItemAksaraBinding
 import com.bangkit.caraka.databinding.ItemHistoryBinding
 
-class KamusAdapter(private val listItem: List<Kamus>) :
+class KamusAdapter(private val kamus: List<Kamus>) :
     RecyclerView.Adapter<KamusAdapter.MyViewHolder>() {
 
     class MyViewHolder(private val binding: ItemAksaraBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Kamus) {
+        fun bind(item: Kamus, position: Int) {
             binding.apply {
                 ivItemAksara.load(item.aksara)
                 tvItemLatin.text = item.latin
+
+                binding.cardViewKamus.setOnClickListener {
+                }
+
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KamusAdapter.MyViewHolder {
         val binding = ItemAksaraBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listItem.size
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(listItem[position])
+    override fun onBindViewHolder(holder: KamusAdapter.MyViewHolder, position: Int) {
+        val materiKamus = kamus[position]
+        holder.bind(materiKamus, position)
     }
+
+    override fun getItemCount(): Int = kamus.size
 }

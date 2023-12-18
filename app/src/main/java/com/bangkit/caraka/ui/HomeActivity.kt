@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,6 +15,7 @@ import com.bangkit.caraka.databinding.ActivityHomeBinding
 import com.bangkit.caraka.ui.camera.CameraActivity
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager
+import com.bangkit.caraka.utill.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
@@ -25,13 +27,16 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var onBoardingPrefManager: OnBoardingPrefManager
-
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModelFactory = ViewModelFactory.getInstance(this)
+        mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         supportActionBar?.hide()
         onBoardingPrefManager = OnBoardingPrefManager(this)
@@ -63,8 +68,6 @@ class HomeActivity : AppCompatActivity() {
 
         getSession()
     }
-
-
 
 
     //fungsi mencek apakah aplikasi pertama kali diluncurkan atau tidak

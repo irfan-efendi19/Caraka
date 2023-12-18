@@ -10,7 +10,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bangkit.caraka.data.ResultData
+import com.bangkit.caraka.data.networking.repository.ResultData
 import com.bangkit.caraka.data.networking.response.RegisterResponse
 import com.bangkit.caraka.databinding.ActivitySignUpBinding
 import com.bangkit.caraka.ui.ViewModelFactory
