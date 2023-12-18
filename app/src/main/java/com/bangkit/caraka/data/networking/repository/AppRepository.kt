@@ -35,17 +35,18 @@ class AppRepository private constructor(
         }
     }
 
-    suspend fun login(email: String, password: String): LiveData<ResultData<LoginResponse>> = liveData {
-        emit(ResultData.Loading)
-        try {
-            val response = apiService.login(email, password)
-            emit(ResultData.Success(response))
-        } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, LoginResponse::class.java)
-            emit(ResultData.Error(errorBody.message.toString()))
+    suspend fun login(email: String, password: String): LiveData<ResultData<LoginResponse>> =
+        liveData {
+            emit(ResultData.Loading)
+            try {
+                val response = apiService.login(email, password)
+                emit(ResultData.Success(response))
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, LoginResponse::class.java)
+                emit(ResultData.Error(errorBody.message.toString()))
+            }
         }
-    }
 
     //mendapatkan stories
     suspend fun getStories(): HistoryResponse =
@@ -73,6 +74,7 @@ class AppRepository private constructor(
     fun getKamus(aksaraId: Int): LiveData<List<Kamus>> = carakaDao.getAllKamus(aksaraId)
 
     suspend fun insertAllData() {
+//        carakaDao.insertQuestion(DummyDataAksara.getQuestionQuestionBali())
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())
     }
 

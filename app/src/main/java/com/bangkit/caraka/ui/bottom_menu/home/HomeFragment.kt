@@ -2,19 +2,21 @@ package com.bangkit.caraka.ui.bottom_menu.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.bangkit.caraka.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.caraka.adapter.HistoryHomeAdapter
+import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.databinding.FragmentHomeBinding
 import com.bangkit.caraka.ui.kamus.KamusActivity
 import com.bangkit.caraka.ui.quiz.QuizActivity
-import com.bangkit.caraka.ui.quiz.StartQuestionFragment
 
 class HomeFragment : Fragment() {
 
@@ -50,7 +52,30 @@ class HomeFragment : Fragment() {
             showToast("Fitur Ini Akan Segera Hadir")
         }
 
+        binding.akasarasundakamus.setOnClickListener {
+            showToast("Fitur Ini Akan Segera Hadir")
+        }
+
+        binding.akasarasundakamus.setOnClickListener {
+            showToast("Fitur Ini Akan Segera Hadir")
+        }
+
+
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupUserRv()
+    }
+
+    private fun setupUserRv() {
+        binding.rvSejarah.apply {
+            val rvLayoutManager = LinearLayoutManager(requireContext())
+            layoutManager = rvLayoutManager
+        }
     }
 
     private fun showToast(message: String?) {

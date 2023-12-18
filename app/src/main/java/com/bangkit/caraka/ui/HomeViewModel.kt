@@ -10,5 +10,4 @@ class HomeViewModel(private val repository: AppRepository) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }
-
 }

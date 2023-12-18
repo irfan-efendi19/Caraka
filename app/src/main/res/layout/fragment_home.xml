@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="Selamat Datang"
+            android:text="Mari Lestarikan Aksara"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="User"
+            android:text="Dengan Mempelajarinya"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
@@ -108,29 +108,47 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/category"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/balilogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksarabalikamus"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksarabalikamus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="1"
                             android:text="Aksara Bali"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/akasarasundakamus"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -143,29 +161,46 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_aksarasundakamus"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/category"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/sundalogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksarasundakamus"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksarasundakamus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Aksara Bali"
+                            android:text="Aksara Sunda"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/akasaralampungkamus"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="10dp"
@@ -178,26 +213,42 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_aksaralampungkamus"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/category"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/lampunglogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksaralampungkamus"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksaralampungkamus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Aksara Bali"
+                            android:text="Aksara Lampung"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </HorizontalScrollView>
@@ -293,26 +344,42 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/icon1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/categoryquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/balilogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksarabaliquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksarabaliquiz"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="1"
                             android:text="Aksara Bali"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -329,26 +396,42 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/icon2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/categoryquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sundalogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksarasundaquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksarasundaquiz"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="2"
                             android:text="Aksara Sunda"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -365,26 +448,42 @@
                         android:layout_gravity="bottom"
                         android:src="@drawable/gradientbrown" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/icon3"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/categoryquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/lampunglogo"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_aksaralampungquiz"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_aksaralampungquiz"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="13dp"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="8dp"
                             android:ellipsize="end"
-                            android:maxLines="2"
-                            android:text="Aksara Lampung"
+                            android:text="Aksara Sunda"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </HorizontalScrollView>
