@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.caraka.adapter.HistoryHomeAdapter
 import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.databinding.FragmentHomeBinding
+import com.bangkit.caraka.ui.jeniskamus.JenisKamusActivity
 import com.bangkit.caraka.ui.kamus.KamusActivity
 import com.bangkit.caraka.ui.quiz.QuizActivity
 
@@ -33,6 +34,11 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.akasarabaliquiz.setOnClickListener {
             val intent = Intent(requireContext(), QuizActivity::class.java)
@@ -40,7 +46,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.akasarabalikamus.setOnClickListener {
-            val intent = Intent(requireContext(), KamusActivity::class.java)
+            val intent = Intent(requireContext(), JenisKamusActivity::class.java)
             startActivity(intent)
         }
 
@@ -56,17 +62,9 @@ class HomeFragment : Fragment() {
             showToast("Fitur Ini Akan Segera Hadir")
         }
 
-        binding.akasarasundakamus.setOnClickListener {
+        binding.akasaralampungkamus.setOnClickListener {
             showToast("Fitur Ini Akan Segera Hadir")
         }
-
-
-
-        return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         setupUserRv()
     }

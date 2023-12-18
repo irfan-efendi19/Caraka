@@ -22,7 +22,7 @@ class KamusActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Kamus"
+        supportActionBar?.title = "Aksara Wyañjana"
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
         kamusViewModel = ViewModelProvider(this, viewModelFactory)[KamusViewModel::class.java]
