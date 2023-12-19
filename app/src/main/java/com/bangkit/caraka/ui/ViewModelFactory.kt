@@ -8,6 +8,7 @@ import com.bangkit.caraka.data.networking.repository.AppRepository
 import com.bangkit.caraka.ui.bottom_menu.history.HistoryViewModel
 import com.bangkit.caraka.ui.bottom_menu.home.HomeFragViewModel
 import com.bangkit.caraka.ui.bottom_menu.profile.ProfileViewModel
+import com.bangkit.caraka.ui.camera.ScannerViewModel
 import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.ui.signin.SignInViewModel
 import com.bangkit.caraka.ui.signup.SignUpViewModel
@@ -49,6 +50,10 @@ class ViewModelFactory(private val repository: AppRepository) :
 
             modelClass.isAssignableFrom(KamusViewModel::class.java) -> {
                 KamusViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(ScannerViewModel::class.java) -> {
+                ScannerViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

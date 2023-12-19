@@ -1,6 +1,7 @@
 package com.bangkit.caraka.ui.camera
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,30 +16,48 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.R
+import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.databinding.ActivityScannerBinding
+import com.bangkit.caraka.ui.ViewModelFactory
+import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.utill.createCustomTempFile
 import com.bangkit.caraka.utill.showToast
+import com.bangkit.caraka.utill.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.lang.Exception
 
 class ScannerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScannerBinding
+    private lateinit var scannerViewModel: ScannerViewModel
 
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
+    private var currentImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModelFactory = ViewModelFactory.getInstance(this)
+        scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
+
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
                 CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
-        binding.switchCamera.setOnClickListener { takePhoto() }
+        binding.captureImage.setOnClickListener{
+            takePhoto()
+        }
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -115,7 +134,7 @@ class ScannerActivity : AppCompatActivity() {
                     val intent = Intent()
                     intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
                     setResult(CAMERAX_RESULT, intent)
-                    finish()
+                    uploadImage()
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -124,6 +143,36 @@ class ScannerActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+
+    private fun uploadImage() {
+        currentImageUri?.let { uri ->
+            val imageFile = uriToFile(uri, this)
+            Log.d("Image File", "showImage: ${imageFile.path}")
+
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                imageFile.name,
+                requestImageFile
+            )
+            scannerViewModel.uploadFile(multipartBody)
+            Log.i("uploadImage", "file $multipartBody")
+            scannerViewModel.uploadResponse.observe(this){ response ->
+                if(!response.error){
+                    val intent = Intent(this, TranslateActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            scannerViewModel.responseMessage.observe(this){
+                it.getContentIfNotHandled()?.let { message ->
+                    showToast(this, message)
+                }
+            }
+        }
     }
 
     private fun hideSystemUI() {
