@@ -44,6 +44,6 @@ class HistoryHomeAdapter(private val artikel: List<Artikel>) :
     }
 
     override fun getItemCount(): Int {
-        return minOf(artikel.size, 5)
+        return minOf(artikel.size, 3)
     }
 }

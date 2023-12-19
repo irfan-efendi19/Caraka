@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/iv_item_photo_history"
+            android:id="@+id/card_item_photo_history"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="32dp"
@@ -21,7 +21,14 @@
             app:cardElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_item_photo_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/title_history"
@@ -35,7 +42,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_item_photo_history" />
+            app:layout_constraintTop_toBottomOf="@+id/card_item_photo_history" />
 
         <TextView
             android:id="@+id/desc_history"
