@@ -47,6 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <Button
+                android:id="@+id/btn_mulai_deteksi"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"

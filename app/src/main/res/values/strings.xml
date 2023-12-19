@@ -67,6 +67,8 @@
 
     <string name="skip">Lewati</string>
     <string name="get_started">Mulai Perjalanan Anda</string>
+    <string name="fail_to_show_camera">fail to show camera</string>
+    <string name="fail_to_take_picture">Gagal Mengambil Gambar</string>
 
 
 </resources>

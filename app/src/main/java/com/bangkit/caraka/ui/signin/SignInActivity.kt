@@ -17,6 +17,7 @@ import com.bangkit.caraka.databinding.ActivitySigninBinding
 import com.bangkit.caraka.ui.HomeActivity
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.signup.SignUpActivity
+import com.bangkit.caraka.utill.showToast
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -80,7 +81,7 @@ class SignInActivity : AppCompatActivity() {
 
                                     is ResultData.Success -> {
                                         showLoading(false)
-                                        showToast("Berhasil Masuk!")
+                                        showToast(this@SignInActivity, "Berhasil Masuk!")
                                         lifecycleScope.launch {
                                             save(
                                                 UserModel(
@@ -95,7 +96,7 @@ class SignInActivity : AppCompatActivity() {
 
                                     is ResultData.Error -> {
                                         showLoading(false)
-                                        showToast(result.error)
+                                        showToast(this@SignInActivity, result.error)
                                     }
 
                                     else -> {
@@ -111,7 +112,7 @@ class SignInActivity : AppCompatActivity() {
                 showLoading(false)
                 val errorBody = e.response()?.errorBody()?.string()
                 val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
-                showToast(errorResponse.message)
+                showToast(this, errorResponse.message)
             }
 
         }
@@ -131,10 +132,6 @@ class SignInActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    private fun showToast(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLoading(isLoading: Boolean) {

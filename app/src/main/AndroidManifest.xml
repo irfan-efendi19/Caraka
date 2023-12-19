@@ -4,7 +4,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,12 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Caraka"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.levelquiz.LevelQuizActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.jeniskamus.JenisKamusActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.kamus.KamusActivity"
             android:exported="false"
@@ -47,7 +41,6 @@
             android:name=".ui.detailhistory.DetailHistoryActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_history"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Caraka" />
         <activity
             android:name=".ui.HomeActivity"
