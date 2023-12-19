@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.data.di.Injection
 import com.bangkit.caraka.data.networking.repository.AppRepository
+import com.bangkit.caraka.ui.bottom_menu.history.HistoryViewModel
+import com.bangkit.caraka.ui.bottom_menu.home.HomeFragViewModel
 import com.bangkit.caraka.ui.bottom_menu.profile.ProfileViewModel
-import com.bangkit.caraka.ui.history.HistoryViewModel
 import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.ui.signin.SignInViewModel
 import com.bangkit.caraka.ui.signup.SignUpViewModel
@@ -34,6 +35,10 @@ class ViewModelFactory(private val repository: AppRepository) :
                 HomeViewModel(repository) as T
             }
 
+            modelClass.isAssignableFrom(HomeFragViewModel::class.java) -> {
+                HomeFragViewModel(repository) as T
+            }
+            
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(repository) as T
             }

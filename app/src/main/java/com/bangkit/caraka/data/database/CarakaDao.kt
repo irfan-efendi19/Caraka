@@ -16,6 +16,12 @@ interface CarakaDao {
 //    fun getAllQuestion(questionId: Int): LiveData<List<Question>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertArtikel(artikel: List<Artikel>)
+
+    @Query("SELECT * from artikel WHERE artikelId = :artikelId")
+    fun getAllArtikel(artikelId: Int): LiveData<List<Artikel>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertKamus(kamus: List<Kamus>)
 
     @Query("SELECT * from kamus WHERE kamusId = :aksaraId")

@@ -1,6 +1,7 @@
 package com.bangkit.caraka.data.dummydata
 
 import com.bangkit.caraka.R
+import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.data.database.Kamus
 import com.bangkit.caraka.data.database.Question
 
@@ -159,4 +160,14 @@ object DummyDataAksara {
         )
     }
 
+    fun getArtikel(): List<Artikel> {
+        return listOf(
+            Artikel(1, 1, "huuuhuu", "https://img.era.id/aDnm2AOq_hOiC82zkhmBCAScn5IGcbzef1g6OCBGFbE/rs:fill:1280:720/g:sm/bG9jYWw6Ly8vL3B1Ymxpc2hlcnMvMTA2NDQyL2JvZHlfaW1hZ2VfMjAyMjEwMTMxMC5qcGc.jpg","huuuhuu"),
+            Artikel(2, 1, "huuuhuu", "huuuhuu","huuuhuu"),
+            Artikel(3, 1, "huuuhuu", "huuuhuu","huuuhuu"),
+            Artikel(4, 1, "huuuhuu", "huuuhuu","huuuhuu"),
+            Artikel(5, 1, "huuuhuu", "huuuhuu","huuuhuu"),
+            Artikel(6, 1, "huuuhuu", "huuuhuu","huuuhuu"),
+        )
+    }
 }

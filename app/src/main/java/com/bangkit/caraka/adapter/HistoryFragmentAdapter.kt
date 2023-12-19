@@ -4,14 +4,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.caraka.R
 import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.databinding.ItemHistoryBinding
 import com.bangkit.caraka.ui.detailhistory.DetailHistoryActivity
 import com.bumptech.glide.Glide
 
-class HistoryHomeAdapter(private val artikel: List<Artikel>) :
-    RecyclerView.Adapter<HistoryHomeAdapter.MyViewHolder>() {
+class HistoryFragmentAdapter(private val artikel: List<Artikel>) :
+    RecyclerView.Adapter<HistoryFragmentAdapter.MyViewHolder>() {
 
     class MyViewHolder(private val binding: ItemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,7 +42,5 @@ class HistoryHomeAdapter(private val artikel: List<Artikel>) :
         holder.bind(artikel)
     }
 
-    override fun getItemCount(): Int {
-        return minOf(artikel.size, 5)
-    }
+    override fun getItemCount(): Int = artikel.size
 }

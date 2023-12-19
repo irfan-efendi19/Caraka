@@ -26,3 +26,13 @@ data class Kamus(
     val aksara: Int,
     val latin: String,
 )
+
+@Entity
+data class Artikel(
+    @PrimaryKey
+    val id: Int,
+    val artikelId: Int,
+    val judul: String,
+    val img_sejarah: String,
+    val desc : String,
+)

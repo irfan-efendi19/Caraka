@@ -27,11 +27,4 @@ interface ApiService {
         @Field("password") password: String,
     ): LoginResponse
 
-    @GET("stories")
-    suspend fun getStories(): HistoryResponse
-
-    @GET("stories/{id}")
-    suspend fun getDetailStory(
-        @Path("id") id : String
-    ): DetailHistory
 }

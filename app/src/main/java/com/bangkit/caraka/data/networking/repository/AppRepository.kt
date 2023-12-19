@@ -2,6 +2,7 @@ package com.bangkit.caraka.data.networking.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
@@ -48,11 +49,6 @@ class AppRepository private constructor(
             }
         }
 
-    //mendapatkan stories
-    suspend fun getStories(): HistoryResponse =
-        apiService.getStories()
-
-
     //fungsi menyimpan preference key
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
@@ -69,18 +65,17 @@ class AppRepository private constructor(
     }
 
     //fungsi mendapatkan detail
-    suspend fun getDetailStory(id: String) = apiService.getDetailStory(id)
 
     fun getKamus(aksaraId: Int): LiveData<List<Kamus>> = carakaDao.getAllKamus(aksaraId)
+    fun getArtikel(artikelId: Int): LiveData<List<Artikel>> = carakaDao.getAllArtikel(artikelId)
 
     suspend fun insertAllData() {
-//        carakaDao.insertQuestion(DummyDataAksara.getQuestionQuestionBali())
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())
+        carakaDao.insertArtikel(DummyDataAksara.getArtikel())
     }
 
 
     companion object {
-
         fun clearInstance() {
             instance = null
         }

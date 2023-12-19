@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Question::class, Kamus::class],
+    entities = [Question::class, Kamus::class, Artikel::class],
     version = 2,
     exportSchema = false
 )

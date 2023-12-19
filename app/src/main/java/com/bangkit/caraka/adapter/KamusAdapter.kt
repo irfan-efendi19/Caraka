@@ -26,12 +26,12 @@ class KamusAdapter(private val kamus: List<Kamus>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KamusAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemAksaraBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: KamusAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val materiKamus = kamus[position]
         holder.bind(materiKamus, position)
     }
