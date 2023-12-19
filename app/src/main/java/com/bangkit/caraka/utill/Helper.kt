@@ -82,3 +82,17 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         source, 0, 0, source.width, source.height, matrix, true
     )
 }
+
+open class Event<out T> (private val content: T) {
+    @Suppress("MemberVisibilityCanBePrivate")
+    var hasBeenHandled = false
+        private set
+    fun getContentIfNotHandled(): T? {
+        return if (hasBeenHandled) {
+            null
+        } else {
+            hasBeenHandled = true
+            content
+        }
+    }
+}

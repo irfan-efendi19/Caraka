@@ -1,6 +1,7 @@
 package com.bangkit.caraka.data.networking.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
@@ -10,10 +11,15 @@ import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.data.networking.response.HistoryResponse
 import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.networking.response.SignupResponse
+import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.data.networking.service.ApiService
 import com.bangkit.caraka.data.networking.userPreference.UserModel
+import com.bangkit.caraka.ui.camera.ScannerViewModel
+import com.bangkit.caraka.utill.Event
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class AppRepository private constructor(
@@ -21,6 +27,12 @@ class AppRepository private constructor(
     private val apiService: ApiService,
     private val userPreference: UserPreference
 ) {
+
+    private val _uploadResponse = MutableLiveData<UploadResponse>()
+    val uploadResponse : LiveData<UploadResponse> = _uploadResponse
+
+    private val _responseMessage = MutableLiveData<Event<String>>()
+    val responseMessage : LiveData<Event<String>> = _responseMessage
 
     suspend fun register(
         name: String,
@@ -48,6 +60,19 @@ class AppRepository private constructor(
                 emit(ResultData.Error(errorBody.message.toString()))
             }
         }
+
+    suspend fun uploadFile(file: MultipartBody.Part){
+        try {
+            val successResponse = apiService.uploadImage(file)
+            _uploadResponse.value = successResponse
+            _responseMessage.value = Event(successResponse.message)
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse =  Gson().fromJson(errorBody, UploadResponse::class.java)
+            _uploadResponse.value = errorResponse
+            _responseMessage.value = Event(errorResponse.message)
+        }
+    }
 
     //fungsi menyimpan preference key
     suspend fun saveSession(user: UserModel) {
