@@ -164,4 +164,14 @@ object DummyDataAksara {
             ),
         )
     }
+
+//    fun getLangganan(): List<Langganan> {
+//        return listOf(
+//            Langganan(
+//                1, 1, 3, 20000
+//            )
+//        )
+//    }
+
+
 }

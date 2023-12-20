@@ -4,22 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.bangkit.caraka.data.database.Artikel
-import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
-import com.bangkit.caraka.data.networking.userPreference.UserPreference
-import com.bangkit.caraka.data.networking.response.HistoryResponse
+import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.networking.response.LoginResponse
-import com.bangkit.caraka.data.networking.response.SignupResponse
+import com.bangkit.caraka.data.networking.response.RegisterResponse
 import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.data.networking.service.ApiService
 import com.bangkit.caraka.data.networking.userPreference.UserModel
-import com.bangkit.caraka.ui.camera.ScannerViewModel
+import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.bangkit.caraka.utill.Event
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class AppRepository private constructor(
@@ -29,16 +26,16 @@ class AppRepository private constructor(
 ) {
 
     private val _uploadResponse = MutableLiveData<UploadResponse>()
-    val uploadResponse : LiveData<UploadResponse> = _uploadResponse
+    val uploadResponse: LiveData<UploadResponse> = _uploadResponse
 
     private val _responseMessage = MutableLiveData<Event<String>>()
-    val responseMessage : LiveData<Event<String>> = _responseMessage
+    val responseMessage: LiveData<Event<String>> = _responseMessage
 
     suspend fun register(
         name: String,
         email: String,
         password: String
-    ): LiveData<ResultData<SignupResponse>> = liveData {
+    ): LiveData<ResultData<RegisterResponse>> = liveData {
         emit(ResultData.Loading)
         val response = apiService.register(name, email, password)
         if (!response.error) {
@@ -61,14 +58,14 @@ class AppRepository private constructor(
             }
         }
 
-    suspend fun uploadFile(file: MultipartBody.Part){
+    suspend fun uploadFile(file: MultipartBody.Part) {
         try {
             val successResponse = apiService.uploadImage(file)
             _uploadResponse.value = successResponse
             _responseMessage.value = Event(successResponse.message)
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse =  Gson().fromJson(errorBody, UploadResponse::class.java)
+            val errorResponse = Gson().fromJson(errorBody, UploadResponse::class.java)
             _uploadResponse.value = errorResponse
             _responseMessage.value = Event(errorResponse.message)
         }
@@ -93,10 +90,12 @@ class AppRepository private constructor(
 
     fun getKamus(aksaraId: Int): LiveData<List<Kamus>> = carakaDao.getAllKamus(aksaraId)
     fun getArtikel(artikelId: Int): LiveData<List<Artikel>> = carakaDao.getAllArtikel(artikelId)
+//    fun getLangganan(langgananId: Int): LiveData<List<Langganan>> = carakaDao.getLangganan(langgananId)
 
     suspend fun insertAllData() {
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())
         carakaDao.insertArtikel(DummyDataAksara.getArtikel())
+//        carakaDao.insertLangganan(DummyDataAksara.getLangganan())
     }
 
 

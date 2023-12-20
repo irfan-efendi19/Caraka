@@ -8,16 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.caraka.adapter.HistoryHomeAdapter
 import com.bangkit.caraka.data.database.Artikel
-import com.bangkit.caraka.data.database.Kamus
 import com.bangkit.caraka.databinding.FragmentHomeBinding
-import com.bangkit.caraka.ui.HomeViewModel
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.jeniskamus.JenisKamusActivity
-import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.ui.quiz.QuizActivity
 
 class HomeFragment : Fragment() {

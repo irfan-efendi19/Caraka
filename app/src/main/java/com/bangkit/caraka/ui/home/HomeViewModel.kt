@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui
+package com.bangkit.caraka.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

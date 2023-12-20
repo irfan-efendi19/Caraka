@@ -23,11 +23,11 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://backend-main-xujidinxka-ts.a.run.app/")
+//                .baseUrl("https://backend-main-xujidinxka-ts.a.run.app/")
+                .baseUrl("https://story-api.dicoding.dev/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
-            val apiService: ApiService = retrofit.create(ApiService::class.java)
             return retrofit.create(ApiService::class.java)
         }
     }

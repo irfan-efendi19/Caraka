@@ -36,3 +36,12 @@ data class Artikel(
     val img_sejarah: String,
     val desc : String,
 )
+
+//@Entity
+//data class Langganan(
+//    @PrimaryKey
+//    val id: Int,
+//    val langgananId: Int,
+//    val durasi: Int,
+//    val harga: Int,
+//)

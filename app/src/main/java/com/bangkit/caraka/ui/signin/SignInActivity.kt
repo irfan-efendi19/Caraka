@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.caraka.data.networking.repository.ResultData
 import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.networking.userPreference.UserModel
 import com.bangkit.caraka.databinding.ActivitySigninBinding
-import com.bangkit.caraka.ui.HomeActivity
+import com.bangkit.caraka.ui.home.HomeActivity
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.signup.SignUpActivity
 import com.bangkit.caraka.utill.showToast

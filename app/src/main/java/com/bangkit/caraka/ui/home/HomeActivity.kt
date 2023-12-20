@@ -1,4 +1,4 @@
-package com.bangkit.caraka.ui
+package com.bangkit.caraka.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bangkit.caraka.R
 import com.bangkit.caraka.databinding.ActivityHomeBinding
+import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.camera.CameraActivity
 import com.bangkit.caraka.ui.onBoarding.feature.onboarding.OnBoardingActivity
 import com.bangkit.caraka.ui.onBoarding.prefmanager.OnBoardingPrefManager

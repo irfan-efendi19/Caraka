@@ -9,6 +9,7 @@ import com.bangkit.caraka.ui.bottom_menu.history.HistoryViewModel
 import com.bangkit.caraka.ui.bottom_menu.home.HomeFragViewModel
 import com.bangkit.caraka.ui.bottom_menu.profile.ProfileViewModel
 import com.bangkit.caraka.ui.camera.ScannerViewModel
+import com.bangkit.caraka.ui.home.HomeViewModel
 import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.ui.signin.SignInViewModel
 import com.bangkit.caraka.ui.signup.SignUpViewModel

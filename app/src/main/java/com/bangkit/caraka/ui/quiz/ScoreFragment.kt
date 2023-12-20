@@ -9,13 +9,10 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.caraka.R
-import com.bangkit.caraka.databinding.FragmentHomeBinding
 import com.bangkit.caraka.databinding.FragmentScoreBinding
-import com.bangkit.caraka.ui.HomeActivity
-import com.bangkit.caraka.ui.camera.CameraActivity
+import com.bangkit.caraka.ui.home.HomeActivity
 
 
 class ScoreFragment : Fragment() {
