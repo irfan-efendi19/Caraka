@@ -69,6 +69,7 @@
     <string name="get_started">Mulai Perjalanan Anda</string>
     <string name="fail_to_show_camera">fail to show camera</string>
     <string name="fail_to_take_picture">Gagal Mengambil Gambar</string>
+    <string name="hasil_scanner">Hasil Scan Anda Akan Muncul Disini</string>
 
 
 </resources>

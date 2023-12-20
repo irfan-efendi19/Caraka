@@ -8,6 +8,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +25,7 @@
             android:name=".ui.bottom_menu.profile.LanggananActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.camera.TranslateActivity"
+            android:name=".ui.camera.ScannerResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.kamus.KamusActivity"
@@ -38,11 +40,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.camera.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.history.HistoryActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.detailhistory.DetailHistoryActivity"
             android:exported="false"
@@ -57,11 +61,7 @@
             android:exported="true"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.signup.SignUpActivity"

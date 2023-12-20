@@ -1,11 +1,14 @@
 package com.bangkit.caraka.data.networking.service
 
+
 import com.bangkit.caraka.data.networking.response.LoginResponse
+import com.bangkit.caraka.data.networking.response.ScanResponse
 import com.bangkit.caraka.data.networking.response.RegisterResponse
 import com.bangkit.caraka.data.networking.response.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -32,4 +35,7 @@ interface ApiService {
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
     ): UploadResponse
+
+    @GET("/scan")
+    suspend fun scanImage(): ScanResponse
 }

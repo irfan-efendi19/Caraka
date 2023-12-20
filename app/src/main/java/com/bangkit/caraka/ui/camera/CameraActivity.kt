@@ -3,20 +3,14 @@ package com.bangkit.caraka.ui.camera
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.bangkit.caraka.databinding.ActivityCameraBinding
-import com.bangkit.caraka.ui.camera.ScannerActivity.Companion.CAMERAX_RESULT
-import com.bangkit.caraka.ui.camera.ScannerActivity.Companion.EXTRA_CAMERAX_IMAGE
 import com.bangkit.caraka.utill.showToast
 
 class CameraActivity : AppCompatActivity() {
-
-    private var currentImageUri: Uri? = null
 
     private lateinit var binding: ActivityCameraBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +24,14 @@ class CameraActivity : AppCompatActivity() {
         binding.btnMulaiDeteksi.setOnClickListener{
             if(isCameraPermissionGranted()){
                 val intent = Intent(this, ScannerActivity::class.java)
-                launcherIntentCameraX.launch(intent)
+                startActivity(intent)
             } else {
                 requestCameraPermissionLauncher.launch(CAMERA_PERMISSION)
             }
         }
     }
 
-    private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == CAMERAX_RESULT) {
-            currentImageUri = it.data?.getStringExtra(EXTRA_CAMERAX_IMAGE)?.toUri()
-        }
-    }
+
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(this, CAMERA_PERMISSION,) == PackageManager.PERMISSION_GRANTED
 

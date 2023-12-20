@@ -10,25 +10,25 @@ import android.view.OrientationEventListener
 import android.view.Surface
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.R
-import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.databinding.ActivityScannerBinding
 import com.bangkit.caraka.ui.ViewModelFactory
-import com.bangkit.caraka.ui.kamus.KamusViewModel
 import com.bangkit.caraka.utill.createCustomTempFile
 import com.bangkit.caraka.utill.showToast
 import com.bangkit.caraka.utill.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import java.lang.Exception
 
 class ScannerActivity : AppCompatActivity() {
@@ -52,8 +52,13 @@ class ScannerActivity : AppCompatActivity() {
                 CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
+
         binding.captureImage.setOnClickListener{
             takePhoto()
+        }
+
+        binding.btnGallery.setOnClickListener{
+            startGallery()
         }
     }
 
@@ -131,10 +136,27 @@ class ScannerActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val intent = Intent()
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
-                    setResult(CAMERAX_RESULT, intent)
-                    uploadImage()
+
+                    currentImageUri = output.savedUri
+                    val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
+//                    uploadImage(imageFile)
+
+                    //sementara testing
+                    val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+                    intent.putExtra(EXTRA_CAMERA_IMAGE, currentImageUri.toString())
+                    startActivity(intent)
+
+//                    scannerViewModel.uploadResponse.observe(this@ScannerActivity){ response ->
+//                        if(!response.error){
+//                            val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+//                            intent.putExtra(EXTRA_IMAGE, output.savedUri.toString())
+//                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                            startActivity(intent)
+//                            finish()
+//                        } else {
+//                            showToast(this@ScannerActivity, response.message)
+//                        }
+//                    }
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -146,34 +168,55 @@ class ScannerActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage() {
-        currentImageUri?.let { uri ->
-            val imageFile = uriToFile(uri, this)
-            Log.d("Image File", "showImage: ${imageFile.path}")
+    private fun startGallery() {
+        launchGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
 
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-            val multipartBody = MultipartBody.Part.createFormData(
-                "photo",
-                imageFile.name,
-                requestImageFile
-            )
-            scannerViewModel.uploadFile(multipartBody)
-            Log.i("uploadImage", "file $multipartBody")
-            scannerViewModel.uploadResponse.observe(this){ response ->
-                if(!response.error){
-                    val intent = Intent(this, TranslateActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
-                }
-            }
-            scannerViewModel.responseMessage.observe(this){
-                it.getContentIfNotHandled()?.let { message ->
-                    showToast(this, message)
-                }
-            }
+    private val launchGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            currentImageUri = uri
+            val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
+//            uploadImage(imageFile)
+
+            //testing sementara
+            val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+            intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
+            startActivity(intent)
+
+//                scannerViewModel.uploadFile(multipartBody)
+//                scannerViewModel.uploadResponse.observe(this){response ->
+//                    if (!response.error) {
+//                        val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+//                        intent.putExtra(EXTRA_IMAGE, selectedImg.toString())
+//                        startActivity(intent)
+//                    } else {
+//                        showToast(this@ScannerActivity, response.message)
+//                    }
+//                }
+        } else {
+            Log.d("Photo Picker", "No media selected")
         }
     }
+
+
+
+    private fun uploadImage(image: File) {
+        if (currentImageUri != null) {
+            Log.d("Image File", "showImage: ${image.path}")
+            val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                image.name,
+                requestImageFile
+            )
+
+            scannerViewModel.uploadFile(multipartBody)
+            Log.i("uploadImage", "file $multipartBody")
+        }
+    }
+
 
     private fun hideSystemUI() {
         @Suppress("DEPRECATION")
@@ -190,7 +233,7 @@ class ScannerActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "CameraActivity"
-        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
-        const val CAMERAX_RESULT = 200
+        const val EXTRA_CAMERA_IMAGE = "CameraImage"
+        const val EXTRA_GALLERY_IMAGE = "GalleryImage"
     }
 }

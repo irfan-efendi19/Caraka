@@ -62,6 +62,8 @@ fun uriToFile(imageUri: Uri, context: Context): File {
 //    return file
 //}
 
+
+// Extension function on Bitmap
 fun Bitmap.getRotatedBitmap(file: File): Bitmap {
     val orientation = ExifInterface(file).getAttributeInt(
         ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED
@@ -75,6 +77,7 @@ fun Bitmap.getRotatedBitmap(file: File): Bitmap {
     }
 }
 
+// Utility function to rotate a Bitmap
 fun rotateImage(source: Bitmap, angle: Float): Bitmap {
     val matrix = Matrix()
     matrix.postRotate(angle)
@@ -83,16 +86,37 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
     )
 }
 
-open class Event<out T> (private val content: T) {
-    @Suppress("MemberVisibilityCanBePrivate")
-    var hasBeenHandled = false
-        private set
-    fun getContentIfNotHandled(): T? {
-        return if (hasBeenHandled) {
-            null
-        } else {
-            hasBeenHandled = true
-            content
-        }
-    }
-}
+
+//private fun rotateBitmap(source: Bitmap, angle: Float): Bitmap {
+//    val matrix = Matrix()
+//    matrix.postRotate(angle)
+//    return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
+//}
+//
+//fun autoRotateImage(imagePath: String, context: Context): Uri {
+//    try {
+//        val exif = ExifInterface(imagePath)
+//        val orientation = exif.getAttributeInt(
+//            ExifInterface.TAG_ORIENTATION,
+//            ExifInterface.ORIENTATION_UNDEFINED
+//        )
+//
+//        val originalBitmap = BitmapFactory.decodeFile(imagePath)
+//        val rotatedBitmap = when (orientation) {
+//            ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(originalBitmap, 90f)
+//            ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(originalBitmap, 180f)
+//            ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(originalBitmap, 270f)
+//            else -> originalBitmap
+//        }
+//
+//        // Save the rotated bitmap to a new file or use it directly as needed
+//        val rotatedImageFile = createCustomTempFile(context.applicationContext)
+//        rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(rotatedImageFile))
+//
+//        return rotatedImageFile.toUri()
+//
+//    } catch (e: IOException) {
+//        e.printStackTrace()
+//        return Uri.parse(imagePath)
+//    }
+//}

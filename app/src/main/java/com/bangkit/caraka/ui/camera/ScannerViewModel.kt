@@ -5,13 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bangkit.caraka.data.networking.repository.AppRepository
+import com.bangkit.caraka.data.networking.response.ScanResponse
 import com.bangkit.caraka.data.networking.response.UploadResponse
-import com.bangkit.caraka.utill.Event
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
+
 
 class ScannerViewModel(private val appRepository: AppRepository): ViewModel() {
 //    val liveDataResponseScanner: MutableLiveData<Result<ScannerResponse>> = MutableLiveData()
@@ -55,11 +53,19 @@ class ScannerViewModel(private val appRepository: AppRepository): ViewModel() {
 //        baksaraRepository.translator2(text)
 
 
-    val responseMessage : LiveData<Event<String>> = appRepository.responseMessage
     val uploadResponse : LiveData<UploadResponse> = appRepository.uploadResponse
     fun uploadFile(file: MultipartBody.Part) {
         viewModelScope.launch {
             appRepository.uploadFile(file)
+        }
+    }
+
+
+    val _scanResponse = MutableLiveData<ScanResponse>()
+    val scanResponse : LiveData<ScanResponse> =  _scanResponse
+    fun scanImageResult() {
+        viewModelScope.launch {
+            _scanResponse.value = appRepository.getScanResult()
         }
     }
 }
