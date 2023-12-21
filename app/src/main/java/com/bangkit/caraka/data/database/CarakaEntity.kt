@@ -37,11 +37,11 @@ data class Artikel(
     val desc : String,
 )
 
-//@Entity
-//data class Langganan(
-//    @PrimaryKey
-//    val id: Int,
-//    val langgananId: Int,
-//    val durasi: Int,
-//    val harga: Int,
-//)
+@Entity
+data class Langganan(
+    @PrimaryKey
+    val id: Int,
+    val langgananId: Int,
+    val durasi: Int,
+    val harga: Int,
+)

@@ -31,11 +31,11 @@ interface ApiService {
     ): LoginResponse
 
     @Multipart
-    @POST("/predict/lampung")
+    @POST("predict/lampung")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
     ): UploadResponse
 
-//    @GET("/predict/lampung")
-//    suspend fun scanImage(): ScanResponse
+    @GET("/scan")
+    suspend fun scanImage(): ScanResponse
 }

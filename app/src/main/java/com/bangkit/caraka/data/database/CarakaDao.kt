@@ -22,11 +22,11 @@ interface CarakaDao {
     fun getAllArtikel(artikelId: Int): LiveData<List<Artikel>>
 
 
-//    @Insert(onConflict = OnConflictStrategy.IGNORE)
-//    suspend fun insertLangganan(langganan: List<Langganan>)
-//
-//    @Query("SELECT * from langganan WHERE langgananId = :langgananId")
-//    fun getLangganan(langgananId: Int): LiveData<List<Langganan>>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertLangganan(langganan: List<Langganan>)
+
+    @Query("SELECT * from langganan WHERE langgananId = :langgananId")
+    fun getLangganan(langgananId: Int): LiveData<List<Langganan>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertKamus(kamus: List<Kamus>)

@@ -7,6 +7,7 @@ import com.bangkit.caraka.data.di.Injection
 import com.bangkit.caraka.data.networking.repository.AppRepository
 import com.bangkit.caraka.ui.bottom_menu.history.HistoryViewModel
 import com.bangkit.caraka.ui.bottom_menu.home.HomeFragViewModel
+import com.bangkit.caraka.ui.bottom_menu.profile.LanggananViewModel
 import com.bangkit.caraka.ui.bottom_menu.profile.ProfileViewModel
 import com.bangkit.caraka.ui.camera.ScannerViewModel
 import com.bangkit.caraka.ui.home.HomeViewModel
@@ -55,6 +56,10 @@ class ViewModelFactory(private val repository: AppRepository) :
 
             modelClass.isAssignableFrom(ScannerViewModel::class.java) -> {
                 ScannerViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(LanggananViewModel::class.java) -> {
+                LanggananViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

@@ -3,6 +3,7 @@ package com.bangkit.caraka.data.dummydata
 import com.bangkit.caraka.R
 import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.data.database.Kamus
+import com.bangkit.caraka.data.database.Langganan
 import com.bangkit.caraka.data.database.Question
 
 object DummyDataAksara {
@@ -165,13 +166,19 @@ object DummyDataAksara {
         )
     }
 
-//    fun getLangganan(): List<Langganan> {
-//        return listOf(
-//            Langganan(
-//                1, 1, 3, 20000
-//            )
-//        )
-//    }
+    fun getLangganan(): List<Langganan> {
+        return listOf(
+            Langganan(
+                1, 1, 1, 15000
+            ),
+            Langganan(
+                2, 1, 3, 35000
+            ),
+            Langganan(
+                3, 1, 6, 60000
+            )
+        )
+    }
 
 
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import com.bangkit.caraka.data.database.Artikel
 import com.bangkit.caraka.data.database.CarakaDao
 import com.bangkit.caraka.data.database.Kamus
+import com.bangkit.caraka.data.database.Langganan
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.data.networking.response.LoginResponse
 import com.bangkit.caraka.data.networking.response.ScanResponse
@@ -90,7 +91,7 @@ class AppRepository private constructor(
 
     fun getKamus(aksaraId: Int): LiveData<List<Kamus>> = carakaDao.getAllKamus(aksaraId)
     fun getArtikel(artikelId: Int): LiveData<List<Artikel>> = carakaDao.getAllArtikel(artikelId)
-//    fun getLangganan(langgananId: Int): LiveData<List<Langganan>> = carakaDao.getLangganan(langgananId)
+    fun getLangganan(langgananId: Int): LiveData<List<Langganan>> = carakaDao.getLangganan(langgananId)
 
     suspend fun getScan(
         img: File,
@@ -108,7 +109,7 @@ class AppRepository private constructor(
     suspend fun insertAllData() {
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())
         carakaDao.insertArtikel(DummyDataAksara.getArtikel())
-//        carakaDao.insertLangganan(DummyDataAksara.getLangganan())
+        carakaDao.insertLangganan(DummyDataAksara.getLangganan())
     }
 
 

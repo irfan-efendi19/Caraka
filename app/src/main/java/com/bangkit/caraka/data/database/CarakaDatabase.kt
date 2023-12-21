@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Question::class, Kamus::class, Artikel::class],
+    entities = [Question::class, Kamus::class, Artikel::class, Langganan::class],
     version = 2,
     exportSchema = false
 )
-abstract class CarakaDatabase: RoomDatabase() {
+abstract class CarakaDatabase : RoomDatabase() {
 
     abstract fun CarakaDao(): CarakaDao
 
@@ -30,7 +30,7 @@ abstract class CarakaDatabase: RoomDatabase() {
             }
         }
 
-        fun destroyDatabase(context: Context){
+        fun destroyDatabase(context: Context) {
             val dbFile = context.getDatabasePath("baksara_db")
             dbFile.delete()
             INSTANCE = null
