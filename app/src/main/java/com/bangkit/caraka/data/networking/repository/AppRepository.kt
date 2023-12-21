@@ -16,8 +16,13 @@ import com.bangkit.caraka.data.networking.userPreference.UserModel
 import com.bangkit.caraka.data.networking.userPreference.UserPreference
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
+import java.io.File
 
 class AppRepository private constructor(
     private val carakaDao: CarakaDao,
@@ -87,7 +92,18 @@ class AppRepository private constructor(
     fun getArtikel(artikelId: Int): LiveData<List<Artikel>> = carakaDao.getAllArtikel(artikelId)
 //    fun getLangganan(langgananId: Int): LiveData<List<Langganan>> = carakaDao.getLangganan(langgananId)
 
-    suspend fun getScanResult(): ScanResponse = apiService.scanImage()
+    suspend fun getScan(
+        img: File,
+    ): Flow<Result<UploadResponse>> = flow{
+        val requestImageFile = img.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("image", img.name, requestImageFile)
+        val response = apiService.uploadImage(imageMultipart)
+
+        emit(Result.success(response))
+    }.catch{ e->
+        e.printStackTrace()
+        emit(Result.failure(e))
+    }
 
     suspend fun insertAllData() {
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())

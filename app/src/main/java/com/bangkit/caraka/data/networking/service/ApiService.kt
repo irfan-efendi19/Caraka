@@ -24,18 +24,18 @@ interface ApiService {
     ): RegisterResponse
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("/auth/login")
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String,
     ): LoginResponse
 
     @Multipart
-    @POST("stories")
+    @POST("/predict/lampung")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
     ): UploadResponse
 
-    @GET("/scan")
-    suspend fun scanImage(): ScanResponse
+//    @GET("/predict/lampung")
+//    suspend fun scanImage(): ScanResponse
 }
