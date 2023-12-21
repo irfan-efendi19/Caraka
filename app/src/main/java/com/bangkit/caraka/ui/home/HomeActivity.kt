@@ -79,10 +79,13 @@ class HomeActivity : AppCompatActivity() {
     private fun getSession() {
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
+
+                //ubah ke signIn Lagi
                 val intent = Intent(this, OnBoardingActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
+
             } else {
                 lifecycleScope.launch {
 //                    viewModel.getStory.observe(this@HomeActivity) { result ->

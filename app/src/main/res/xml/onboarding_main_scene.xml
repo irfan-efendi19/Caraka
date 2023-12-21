@@ -2,11 +2,9 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Transition
-        android:id="@+id/onboarding_transition"
+    <Transition android:id="@+id/onboarding_transition"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start"
-        app:duration="700"
         app:motionInterpolator="easeInOut">
         <KeyFrameSet>
 
@@ -23,22 +21,22 @@
             <KeyAttribute
                 android:translationX="0dp"
                 app:framePosition="50"
-                app:motionTarget="@id/nextBtn" />
+                app:motionTarget="@id/nextBtn"/>
 
             <KeyAttribute
                 android:translationX="100dp"
                 app:framePosition="100"
-                app:motionTarget="@id/nextBtn" />
+                app:motionTarget="@id/nextBtn"/>
 
             <KeyAttribute
                 android:translationY="100dp"
-                app:framePosition="150"
-                app:motionTarget="@id/startBtn" />
+                app:framePosition="50"
+                app:motionTarget="@id/startBtn"/>
 
             <KeyAttribute
                 android:translationY="0dp"
                 app:framePosition="100"
-                app:motionTarget="@id/startBtn" />
+                app:motionTarget="@id/startBtn"/>
         </KeyFrameSet>
     </Transition>
 
@@ -49,7 +47,7 @@
             android:layout_height="wrap_content"
             android:translationX="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
             android:id="@+id/nextBtn"
@@ -57,7 +55,7 @@
             android:layout_height="wrap_content"
             android:translationX="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <Constraint
             android:id="@+id/startBtn"
@@ -65,7 +63,7 @@
             android:layout_height="wrap_content"
             android:translationY="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -76,7 +74,7 @@
             android:layout_height="wrap_content"
             android:translationX="-100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
             android:id="@id/nextBtn"
@@ -84,7 +82,7 @@
             android:layout_height="wrap_content"
             android:translationX="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <Constraint
             android:id="@id/startBtn"
@@ -93,6 +91,6 @@
             android:translationY="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
     </ConstraintSet>
 </MotionScene>
