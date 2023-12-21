@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,7 @@ class ScannerResultActivity : AppCompatActivity() {
 
         val imageUrlCamera = intent.getStringExtra(ScannerActivity.EXTRA_CAMERA_IMAGE)?.toUri()
         val imageUrlGallery = intent.getStringExtra(ScannerActivity.EXTRA_GALLERY_IMAGE)?.toUri()
+        val scanResult = intent.getStringExtra(ScannerActivity.EXTRA_RESULT_SCANNER)
 
         if (imageUrlCamera != null){
             val bitmap = BitmapFactory.decodeFile(imageUrlCamera.path)
@@ -45,10 +47,17 @@ class ScannerResultActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        scannerViewModel.scanImageResult()
-        scannerViewModel.scanResponse.observe(this){ response ->
-            binding.tvScanResult.text = response.result
+        if (scanResult != null){
+            binding.tvScanResult.text = scanResult.toString()
+        } else {
+            showToast(this, "result null")
         }
+
+
+//        scannerViewModel.scanImageResult()
+//        scannerViewModel.scanResponse.observe(this){ response ->
+//            binding.tvScanResult.text = response.result
+//        }
     }
 }
 

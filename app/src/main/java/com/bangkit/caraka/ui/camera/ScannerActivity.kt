@@ -2,12 +2,14 @@ package com.bangkit.caraka.ui.camera
 
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.OrientationEventListener
 import android.view.Surface
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.result.PickVisualMediaRequest
@@ -18,8 +20,10 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.R
+import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.databinding.ActivityScannerBinding
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.utill.createCustomTempFile
@@ -38,6 +42,9 @@ class ScannerActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
+    private var result: String? = null
+    private var isCameraImage: Boolean = false
+    private var isGalleryImage: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +67,28 @@ class ScannerActivity : AppCompatActivity() {
         binding.btnGallery.setOnClickListener{
             startGallery()
         }
+
+        scannerViewModel.uploadResponse.observe(this){
+            result = it.hasil
+            binding.progressBarScanner.visibility = View.GONE
+            val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+            when {
+                isCameraImage -> {
+                    intent.putExtra(EXTRA_CAMERA_IMAGE, currentImageUri.toString())
+                    isCameraImage = false
+                }
+                isGalleryImage -> {
+                    intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
+                    isGalleryImage = false
+                }
+                else ->{
+                    showToast(this, "No Image")
+                }
+            }
+            intent.putExtra(EXTRA_RESULT_SCANNER, result)
+            startActivity(intent)
+        }
+
     }
 
 
@@ -139,12 +168,9 @@ class ScannerActivity : AppCompatActivity() {
 
                     currentImageUri = output.savedUri
                     val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
-//                    uploadImage(imageFile)
-
-                    //sementara testing
-                    val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
-                    intent.putExtra(EXTRA_CAMERA_IMAGE, currentImageUri.toString())
-                    startActivity(intent)
+                     uploadImage(imageFile)
+                    binding.progressBarScanner.visibility = View.VISIBLE
+                    isCameraImage = true
 
 //                    scannerViewModel.uploadResponse.observe(this@ScannerActivity){ response ->
 //                        if(!response.error){
@@ -178,21 +204,17 @@ class ScannerActivity : AppCompatActivity() {
         if (uri != null) {
             currentImageUri = uri
             val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
-//            uploadImage(imageFile)
+            uploadImage(imageFile)
+            binding.progressBarScanner.visibility = View.VISIBLE
+            isGalleryImage = true
 
-            //testing sementara
-            val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
-            intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
-            startActivity(intent)
-
-//                scannerViewModel.uploadFile(multipartBody)
 //                scannerViewModel.uploadResponse.observe(this){response ->
 //                    if (!response.error) {
 //                        val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
-//                        intent.putExtra(EXTRA_IMAGE, selectedImg.toString())
+//                        intent.putExtra(EXTRA_GALLERY_IMAGE, imageFile.toString())
 //                        startActivity(intent)
 //                    } else {
-//                        showToast(this@ScannerActivity, response.message)
+//                        showToast(this@ScannerActivity, "Error")
 //                    }
 //                }
         } else {
@@ -207,13 +229,13 @@ class ScannerActivity : AppCompatActivity() {
             Log.d("Image File", "showImage: ${image.path}")
             val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
-                "photo",
+                "file",
                 image.name,
                 requestImageFile
             )
 
             scannerViewModel.uploadFile(multipartBody)
-            Log.i("uploadImage", "file $multipartBody")
+            Log.i("uploadImage", "file diupload")
         }
     }
 
@@ -235,5 +257,6 @@ class ScannerActivity : AppCompatActivity() {
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERA_IMAGE = "CameraImage"
         const val EXTRA_GALLERY_IMAGE = "GalleryImage"
+        const val EXTRA_RESULT_SCANNER = "ResultScanner"
     }
 }
