@@ -65,9 +65,9 @@ class AppRepository private constructor(
         }
 
 
-    suspend fun uploadFile(file: MultipartBody.Part) {
+    suspend fun uploadFile(file: MultipartBody.Part, daerah: String) {
         try {
-            val successResponse = apiService.uploadImage(file)
+            val successResponse = apiService.uploadImage(file, daerah)
             _uploadResponse.value = successResponse
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
@@ -148,18 +148,18 @@ class AppRepository private constructor(
     fun getArtikel(artikelId: Int): LiveData<List<Artikel>> = carakaDao.getAllArtikel(artikelId)
     fun getLangganan(langgananId: Int): LiveData<List<Langganan>> = carakaDao.getLangganan(langgananId)
 
-    suspend fun getScan(
-        img: File,
-    ): Flow<Result<UploadResponse>> = flow{
-        val requestImageFile = img.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("image", img.name, requestImageFile)
-        val response = apiService.uploadImage(imageMultipart)
-
-        emit(Result.success(response))
-    }.catch{ e->
-        e.printStackTrace()
-        emit(Result.failure(e))
-    }
+//    suspend fun getScan(
+//        img: File,
+//    ): Flow<Result<UploadResponse>> = flow{
+//        val requestImageFile = img.asRequestBody("image/jpeg".toMediaTypeOrNull())
+//        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("image", img.name, requestImageFile)
+//        val response = apiService.uploadImage(imageMultipart)
+//
+//        emit(Result.success(response))
+//    }.catch{ e->
+//        e.printStackTrace()
+//        emit(Result.failure(e))
+//    }
 
     suspend fun insertAllData() {
         carakaDao.insertKamus(DummyDataAksara.getAksaraKamus())

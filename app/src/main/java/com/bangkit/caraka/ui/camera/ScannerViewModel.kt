@@ -15,11 +15,9 @@ import okhttp3.MultipartBody
 class ScannerViewModel(private val appRepository: AppRepository) : ViewModel() {
     val uploadResponse: LiveData<UploadResponse> = appRepository.uploadResponse
 
-
-
-    fun uploadFile(file: MultipartBody.Part) {
+    fun uploadFile(file: MultipartBody.Part, daerah: String) {
         viewModelScope.launch {
-            appRepository.uploadFile(file)
+            appRepository.uploadFile(file, daerah)
         }
     }
 
@@ -37,6 +35,7 @@ class ScannerViewModel(private val appRepository: AppRepository) : ViewModel() {
 
 
     val _scanResponse = MutableLiveData<ScanResponse>()
+    val scanResponse : LiveData<ScanResponse> =  _scanResponse
     fun scanImageResult() {
         viewModelScope.launch {
 //            _scanResponse.value = appRepository.getScanResult()

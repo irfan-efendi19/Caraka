@@ -47,6 +47,7 @@ class ScannerActivity : AppCompatActivity() {
     var isCameraImage: Boolean = false
     private var isGalleryImage: Boolean = false
     private lateinit var uploadResponseObserver: Observer<UploadResponse>
+    private lateinit var daerah: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class ScannerActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory.getInstance(this)
         scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
 
+        daerah = intent.getStringExtra(CameraActivity.EXTRA_DAERAH).toString()
 
         binding.constraintLayoutScannerHolder.visibility = View.VISIBLE
         binding.switchCamera.setOnClickListener {
@@ -79,6 +81,8 @@ class ScannerActivity : AppCompatActivity() {
                 showToast(this, "No internet connection.")
             }
         }
+
+        showToast(this, "Menggunakan Scanner $daerah")
 
         uploadResponseObserver = Observer { response ->
             val succes = response.status == null
@@ -269,7 +273,10 @@ class ScannerActivity : AppCompatActivity() {
                     image.name,
                     requestImageFile
                 )
-                scannerViewModel.uploadFile(multipartBody)
+
+            if (daerah != null) {
+                scannerViewModel.uploadFile(multipartBody, daerah)
+            }
 //                scannerViewModel.isLoading.observe(this) {
 //                    showLoading(it)
 //                    showConstraintLayoutHolder(it)

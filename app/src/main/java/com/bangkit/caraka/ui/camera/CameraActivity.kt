@@ -18,12 +18,34 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bali = "bali"
+        val lampung = "lampung"
+        val sunda = "sunda"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Deteksi Aksara"
 
-        binding.btnMulaiDeteksi.setOnClickListener{
+        binding.btnDeteksiBali.setOnClickListener{
             if(isCameraPermissionGranted()){
                 val intent = Intent(this, ScannerActivity::class.java)
+                intent.putExtra(EXTRA_DAERAH, bali)
+                startActivity(intent)
+            } else {
+                requestCameraPermissionLauncher.launch(CAMERA_PERMISSION)
+            }
+        }
+        binding.btnDeteksiLampung.setOnClickListener{
+            if(isCameraPermissionGranted()){
+                val intent = Intent(this, ScannerActivity::class.java)
+                intent.putExtra(EXTRA_DAERAH, lampung)
+                startActivity(intent)
+            } else {
+                requestCameraPermissionLauncher.launch(CAMERA_PERMISSION)
+            }
+        }
+        binding.btnDeteksiSunda.setOnClickListener{
+            if(isCameraPermissionGranted()){
+                val intent = Intent(this, ScannerActivity::class.java)
+                intent.putExtra(EXTRA_DAERAH, sunda)
                 startActivity(intent)
             } else {
                 requestCameraPermissionLauncher.launch(CAMERA_PERMISSION)
@@ -57,5 +79,6 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
         private const val CAMERA_PERMISSION = Manifest.permission.CAMERA
+        const val EXTRA_DAERAH = "extraDaerah"
     }
 }

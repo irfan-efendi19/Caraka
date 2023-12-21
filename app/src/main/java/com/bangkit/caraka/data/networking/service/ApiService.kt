@@ -2,13 +2,11 @@ package com.bangkit.caraka.data.networking.service
 
 
 import com.bangkit.caraka.data.networking.response.LoginResponse
-import com.bangkit.caraka.data.networking.response.ScanResponse
 import com.bangkit.caraka.data.networking.response.RegisterResponse
 import com.bangkit.caraka.data.networking.response.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -30,10 +28,16 @@ interface ApiService {
         @Field("password") password: String,
     ): LoginResponse
 
+//    @Multipart
+//    @POST("predict/bali")
+//    suspend fun uploadImage(
+//        @Part file: MultipartBody.Part,
+//    ): UploadResponse
     @Multipart
-    @POST("predict/lampung")
+    @POST("predict/{daerah}")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
+        @retrofit2.http.Path("daerah") daerah: String
     ): UploadResponse
 
     @Multipart
@@ -43,7 +47,7 @@ interface ApiService {
     ): UploadResponse
 
     @Multipart
-    @POST("predict/bali")
+    @POST("predict/Lampung")
     suspend fun uploadImage2(
         @Part file: MultipartBody.Part,
     ): UploadResponse
