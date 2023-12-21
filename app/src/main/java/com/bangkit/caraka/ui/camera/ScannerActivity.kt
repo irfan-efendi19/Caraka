@@ -285,14 +285,6 @@ class ScannerActivity : AppCompatActivity() {
         return networkInfo != null && networkInfo.isConnected
     }
 
-//    private fun showLoading(isLoading: Boolean) {
-//        binding.progressBarScanner.visibility = (if (isLoading) View.VISIBLE else View.GONE)
-//    }
-//    private fun showConstraintLayoutHolder(isLoading: Boolean) {
-//        binding.constraintLayoutScannerHolder.visibility = (if (isLoading) View.GONE else View.VISIBLE)
-//    }
-
-
     private fun hideSystemUI() {
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

@@ -31,8 +31,20 @@ interface ApiService {
     ): LoginResponse
 
     @Multipart
-    @POST("predict/bali")
+    @POST("predict/lampung")
     suspend fun uploadImage(
+        @Part file: MultipartBody.Part,
+    ): UploadResponse
+
+    @Multipart
+    @POST("predict/sunda")
+    suspend fun uploadImage1(
+        @Part file: MultipartBody.Part,
+    ): UploadResponse
+
+    @Multipart
+    @POST("predict/bali")
+    suspend fun uploadImage2(
         @Part file: MultipartBody.Part,
     ): UploadResponse
 }

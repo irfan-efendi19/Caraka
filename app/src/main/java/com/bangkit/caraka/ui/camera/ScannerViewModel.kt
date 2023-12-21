@@ -12,49 +12,10 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
 
-class ScannerViewModel(private val appRepository: AppRepository): ViewModel() {
-//    val liveDataResponseScanner: MutableLiveData<Result<ScannerResponse>> = MutableLiveData()
-//    val liveDataTranslatorResponse: MutableLiveData<Result<Translatorv2Response>> = MutableLiveData()
-//    private val _liveDataIsLoading: MutableLiveData<Boolean> = MutableLiveData()
-//    val liveDataIsLoading: LiveData<Boolean> = _liveDataIsLoading
-//
-//    fun fetchUserResponse(newJumlahScan: Int, userId: Int){
-//        viewModelScope.launch {
-//            updateUserJumlahScan(newJumlahScan, userId).collect{ response ->
-//                liveDataResponseUpdateUser.value = response
-//            }
-//        }
-//    }
-//
-//    fun fetchScannerResponse(img: File){
-//        _liveDataIsLoading.value = true
-//        viewModelScope.launch {
-//            performScanner(img).collect{ response->
-//                liveDataResponseScanner.value = response
-//                _liveDataIsLoading.value = false
-//            }
-//        }
-//    }
-//
-//    fun fetchTranslatorResult(text: String){
-//        viewModelScope.launch {
-//            getTranslator(text).collect{ response ->
-//                liveDataTranslatorResponse.value = response
-//            }
-//        }
-//    }
-//
-//    suspend fun updateUserJumlahScan(newJumlahScan: Int, userId: Int): Flow<Result<GraphQLResponse>> =
-//        baksaraRepository.updateUserScan(newJumlahScan, userId)
-//
-//    suspend fun performScanner(img: File): Flow<Result<ScannerResponse>> =
-//        baksaraRepository.scannerResult(img)
-//
-//    suspend fun getTranslator(text:String): Flow<Result<Translatorv2Response>> =
-//        baksaraRepository.translator2(text)
+class ScannerViewModel(private val appRepository: AppRepository) : ViewModel() {
+    val uploadResponse: LiveData<UploadResponse> = appRepository.uploadResponse
 
 
-    val uploadResponse : LiveData<UploadResponse> = appRepository.uploadResponse
 
     fun uploadFile(file: MultipartBody.Part) {
         viewModelScope.launch {
@@ -62,9 +23,20 @@ class ScannerViewModel(private val appRepository: AppRepository): ViewModel() {
         }
     }
 
+    fun uploadFile1(file: MultipartBody.Part) {
+        viewModelScope.launch {
+            appRepository.uploadFile1(file)
+        }
+    }
+
+    fun uploadFile3(file: MultipartBody.Part) {
+        viewModelScope.launch {
+            appRepository.uploadFile2(file)
+        }
+    }
+
 
     val _scanResponse = MutableLiveData<ScanResponse>()
-    val scanResponse : LiveData<ScanResponse> =  _scanResponse
     fun scanImageResult() {
         viewModelScope.launch {
 //            _scanResponse.value = appRepository.getScanResult()
