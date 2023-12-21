@@ -1,8 +1,9 @@
 package com.bangkit.caraka.ui.camera
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,7 +21,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.caraka.R
 import com.bangkit.caraka.data.networking.response.UploadResponse
@@ -40,11 +41,12 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var scannerViewModel: ScannerViewModel
 
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private var imageCapture: ImageCapture? = null
-    private var currentImageUri: Uri? = null
-    private var result: String? = null
-    private var isCameraImage: Boolean = false
+    var imageCapture: ImageCapture? = null
+    var currentImageUri: Uri? = null
+    var resultText: String? = null
+    var isCameraImage: Boolean = false
     private var isGalleryImage: Boolean = false
+    private lateinit var uploadResponseObserver: Observer<UploadResponse>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,8 @@ class ScannerActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory.getInstance(this)
         scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
 
+
+        binding.constraintLayoutScannerHolder.visibility = View.VISIBLE
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
                 CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA
@@ -61,34 +65,64 @@ class ScannerActivity : AppCompatActivity() {
         }
 
         binding.captureImage.setOnClickListener{
-            takePhoto()
+            if (isNetworkConnected()) {
+                takePhoto()
+            } else {
+                showToast(this,"No internet connection.")
+            }
         }
 
         binding.btnGallery.setOnClickListener{
-            startGallery()
+            if (isNetworkConnected()) {
+                startGallery()
+            } else {
+                showToast(this, "No internet connection.")
+            }
         }
 
-        scannerViewModel.uploadResponse.observe(this){
-            result = it.hasil
-            binding.progressBarScanner.visibility = View.GONE
-            val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
-            when {
-                isCameraImage -> {
-                    intent.putExtra(EXTRA_CAMERA_IMAGE, currentImageUri.toString())
+        uploadResponseObserver = Observer { response ->
+            val succes = response.status == null
+            val failed = response.status == "fail"
+            Log.d("Scanner Activity", "Perform Observe")
+            when{
+                succes -> {
+                    resultText = response.hasil
+                    binding.progressBarScanner.visibility = View.GONE
+                    val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
+                    when {
+                        isCameraImage -> {
+                            intent.putExtra(EXTRA_CAMERA_IMAGE, currentImageUri.toString())
+                            isCameraImage = false
+                            response.status = "done"
+                        }
+                        isGalleryImage -> {
+                            intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
+                            isGalleryImage = false
+                            response.status = "done"
+                        }
+                    }
+                    intent.putExtra(EXTRA_RESULT_SCANNER, resultText)
+                    startActivity(intent)
+                }
+
+                failed -> {
                     isCameraImage = false
-                }
-                isGalleryImage -> {
-                    intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
                     isGalleryImage = false
-                }
-                else ->{
-                    showToast(this, "No Image")
+                    currentImageUri = null
+                    resultText = null
+                    response.status = "retry"
+
+                    showToast(this, response.message)
+                    Log.d("", response.message.toString())
+
+                    binding.progressBarScanner.visibility = View.GONE
+                    binding.constraintLayoutScannerHolder.visibility = View.VISIBLE
+
+                    // Menghentikan observasi setelah menerima respons "fail"
+                    scannerViewModel.uploadResponse.removeObserver(uploadResponseObserver)
                 }
             }
-            intent.putExtra(EXTRA_RESULT_SCANNER, result)
-            startActivity(intent)
         }
-
     }
 
 
@@ -168,9 +202,10 @@ class ScannerActivity : AppCompatActivity() {
 
                     currentImageUri = output.savedUri
                     val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
-                     uploadImage(imageFile)
-                    binding.progressBarScanner.visibility = View.VISIBLE
                     isCameraImage = true
+                    uploadImage(imageFile)
+                    binding.progressBarScanner.visibility = View.VISIBLE
+                    binding.constraintLayoutScannerHolder.visibility = View.GONE
 
 //                    scannerViewModel.uploadResponse.observe(this@ScannerActivity){ response ->
 //                        if(!response.error){
@@ -204,9 +239,10 @@ class ScannerActivity : AppCompatActivity() {
         if (uri != null) {
             currentImageUri = uri
             val imageFile = uriToFile(currentImageUri!!, this@ScannerActivity)
+            isGalleryImage = true
             uploadImage(imageFile)
             binding.progressBarScanner.visibility = View.VISIBLE
-            isGalleryImage = true
+            binding.constraintLayoutScannerHolder.visibility = View.GONE
 
 //                scannerViewModel.uploadResponse.observe(this){response ->
 //                    if (!response.error) {
@@ -226,18 +262,35 @@ class ScannerActivity : AppCompatActivity() {
 
     private fun uploadImage(image: File) {
         if (currentImageUri != null) {
-            Log.d("Image File", "showImage: ${image.path}")
-            val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
-            val multipartBody = MultipartBody.Part.createFormData(
-                "file",
-                image.name,
-                requestImageFile
-            )
-
-            scannerViewModel.uploadFile(multipartBody)
-            Log.i("uploadImage", "file diupload")
+                Log.d("Image File", "showImage: ${image.path}")
+                val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
+                val multipartBody = MultipartBody.Part.createFormData(
+                    "file",
+                    image.name,
+                    requestImageFile
+                )
+                scannerViewModel.uploadFile(multipartBody)
+//                scannerViewModel.isLoading.observe(this) {
+//                    showLoading(it)
+//                    showConstraintLayoutHolder(it)
+//            }
+                restartObservation()
+                Log.i("uploadImage", "file diupload")
         }
     }
+
+    private fun isNetworkConnected(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+
+//    private fun showLoading(isLoading: Boolean) {
+//        binding.progressBarScanner.visibility = (if (isLoading) View.VISIBLE else View.GONE)
+//    }
+//    private fun showConstraintLayoutHolder(isLoading: Boolean) {
+//        binding.constraintLayoutScannerHolder.visibility = (if (isLoading) View.GONE else View.VISIBLE)
+//    }
 
 
     private fun hideSystemUI() {
@@ -251,6 +304,15 @@ class ScannerActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+
+
+
+
+    private fun restartObservation() {
+        // Memulai observasi lagi setelah menghentikannya
+        scannerViewModel.uploadResponse.observe(this, uploadResponseObserver)
     }
 
     companion object {

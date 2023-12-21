@@ -1,5 +1,6 @@
 package com.bangkit.caraka.ui.camera
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,6 +55,7 @@ class ScannerViewModel(private val appRepository: AppRepository): ViewModel() {
 
 
     val uploadResponse : LiveData<UploadResponse> = appRepository.uploadResponse
+
     fun uploadFile(file: MultipartBody.Part) {
         viewModelScope.launch {
             appRepository.uploadFile(file)

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +24,8 @@ class ScannerResultActivity : AppCompatActivity() {
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
         scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
+
+
 
         val imageUrlCamera = intent.getStringExtra(ScannerActivity.EXTRA_CAMERA_IMAGE)?.toUri()
         val imageUrlGallery = intent.getStringExtra(ScannerActivity.EXTRA_GALLERY_IMAGE)?.toUri()

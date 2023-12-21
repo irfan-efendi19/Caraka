@@ -31,8 +31,11 @@ class AppRepository private constructor(
     private val userPreference: UserPreference
 ) {
 
-    private val _uploadResponse = MutableLiveData<UploadResponse>()
+    val _uploadResponse = MutableLiveData<UploadResponse>()
     val uploadResponse : LiveData<UploadResponse> = _uploadResponse
+
+//    private val _isLoading = MutableLiveData<Boolean>()
+//    val isLoading: LiveData<Boolean> = _isLoading
 
     suspend fun register(
         name: String,
@@ -61,16 +64,45 @@ class AppRepository private constructor(
             }
         }
 
-    suspend fun uploadFile(file: MultipartBody.Part){
+
+    suspend fun uploadFile(file: MultipartBody.Part) {
         try {
             val successResponse = apiService.uploadImage(file)
             _uploadResponse.value = successResponse
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse =  Gson().fromJson(errorBody, UploadResponse::class.java)
+            val errorResponse = Gson().fromJson(errorBody, UploadResponse::class.java)
             _uploadResponse.value = errorResponse
         }
     }
+
+//    }
+//
+//    private val maxRetries = 2
+//    private var retryCount = 0
+//    suspend fun uploadFile(file: MultipartBody.Part, context: Context){
+//        _isLoading.value = true
+//        try {
+//            val successResponse = apiService.uploadImage(file)
+//            _uploadResponse.value = successResponse
+//            _isLoading.value = false
+//        } catch (e: SocketTimeoutException) {
+//            if (retryCount < maxRetries) {
+//                retryCount++
+//                delay(retryCount * 1000L) // Increase delay between retries
+//                uploadFile(file, context) // Retry the network request
+//            } else {
+//                // Maximum retries reached, handle accordingly
+//                Log.e("Network Retry", "Maximum retries reached.")
+//                _isLoading.value = false
+//                showToast(context,"Maximum retries reached. try again")
+//            }
+//        } catch (e: Exception) {
+//            _isLoading.value = false
+//            showToast(context, "Gagal Terdeteksi Coba Lagi")
+//
+//        }
+//    }
 
     //fungsi menyimpan preference key
     suspend fun saveSession(user: UserModel) {
