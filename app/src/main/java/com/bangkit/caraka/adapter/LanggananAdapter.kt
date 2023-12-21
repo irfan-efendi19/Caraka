@@ -2,6 +2,7 @@ package com.bangkit.caraka.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.bangkit.caraka.data.database.Kamus
@@ -20,7 +21,6 @@ class LanggananAdapter(private val langganan: List<Langganan>) :
                 tvhargaberlangganan.text = "Rp. " + item.harga.toString()
                 binding.cardViewKamus.setOnClickListener {
                 }
-
             }
         }
     }
