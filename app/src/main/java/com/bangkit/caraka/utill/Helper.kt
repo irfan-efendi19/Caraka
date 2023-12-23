@@ -3,6 +3,7 @@ package com.bangkit.caraka.utill
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.Toast
@@ -87,36 +88,9 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
 }
 
 
-//private fun rotateBitmap(source: Bitmap, angle: Float): Bitmap {
-//    val matrix = Matrix()
-//    matrix.postRotate(angle)
-//    return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
-//}
-//
-//fun autoRotateImage(imagePath: String, context: Context): Uri {
-//    try {
-//        val exif = ExifInterface(imagePath)
-//        val orientation = exif.getAttributeInt(
-//            ExifInterface.TAG_ORIENTATION,
-//            ExifInterface.ORIENTATION_UNDEFINED
-//        )
-//
-//        val originalBitmap = BitmapFactory.decodeFile(imagePath)
-//        val rotatedBitmap = when (orientation) {
-//            ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(originalBitmap, 90f)
-//            ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(originalBitmap, 180f)
-//            ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(originalBitmap, 270f)
-//            else -> originalBitmap
-//        }
-//
-//        // Save the rotated bitmap to a new file or use it directly as needed
-//        val rotatedImageFile = createCustomTempFile(context.applicationContext)
-//        rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(rotatedImageFile))
-//
-//        return rotatedImageFile.toUri()
-//
-//    } catch (e: IOException) {
-//        e.printStackTrace()
-//        return Uri.parse(imagePath)
-//    }
-//}
+fun isNetworkConnected(context: Context): Boolean {
+    val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.activeNetworkInfo
+    return networkInfo != null && networkInfo.isConnected
+}

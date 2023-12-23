@@ -17,6 +17,7 @@ import com.bangkit.caraka.R
 import com.bangkit.caraka.data.database.Question
 import com.bangkit.caraka.data.dummydata.DummyDataAksara
 import com.bangkit.caraka.databinding.FragmentQuizBinding
+import com.bangkit.caraka.utill.showToast
 
 
 class QuizFragment : Fragment(), View.OnClickListener {
@@ -28,6 +29,7 @@ class QuizFragment : Fragment(), View.OnClickListener {
     private var mSelectedPosition: Int = 0
     private var mCorrectAnswer: Int = 0
     private var mCurrentPosition: Int = 1
+    private var submitCounter: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +55,12 @@ class QuizFragment : Fragment(), View.OnClickListener {
     private fun setQuestion() {
         val question: Question = mQuestionsList[mCurrentPosition - 1]
 
+        //re enable options
+        selectedOptionView(binding.tvOptionOne,true)
+        selectedOptionView(binding.tvOptionTwo,true)
+        selectedOptionView(binding.tvOptionThree,true)
+        selectedOptionView(binding.tvOptionFour,true)
+
         binding.tvQuestion.text = question.question
         binding.imageView.setImageResource(question.image)
         binding.tvOptionOne.text = question.optionOne
@@ -70,11 +78,7 @@ class QuizFragment : Fragment(), View.OnClickListener {
         defaultAppearance()
 
         // semua pertanyan terpenuhi
-        if (mCurrentPosition == mQuestionsList.size) {
-            binding.btnSubmit.text = "Kuis Telah Selesai"
-        } else {
-            binding.btnSubmit.text = "Jawab"
-        }
+        if (mCurrentPosition != mQuestionsList.size && submitCounter == 0) { binding.btnSubmit.text = "Jawab" }
     }
 
     private fun defaultAppearance() {
@@ -97,58 +101,73 @@ class QuizFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.tv_optionOne -> {
                 selectedOptionView(binding.tvOptionOne, 1)
+                mSelectedPosition = 1
             }
 
             R.id.tv_optionTwo -> {
                 selectedOptionView(binding.tvOptionTwo, 2)
+                mSelectedPosition = 2
             }
 
             R.id.tv_optionThree -> {
                 selectedOptionView(binding.tvOptionThree, 3)
+                mSelectedPosition = 3
             }
 
             R.id.tv_optionFour -> {
                 selectedOptionView(binding.tvOptionFour, 4)
+                mSelectedPosition = 4
             }
+
 
             R.id.btnSubmit -> {
-                // jika belum disentuh
                 if (mSelectedPosition == 0) {
-                    mCurrentPosition++ // saat soal bertambah
-                    //get soal berikutnya
-                    when {
-                        mCurrentPosition <= mQuestionsList.size -> {
-                            setQuestion()
-                        }
-
-                        else -> {
-                            // menampilkan hasil
-                            val action = QuizFragmentDirections.actionGameFragmentToScoreFragment()
-                            val nameOfPlayer by navArgs<QuizFragmentArgs>()
-                            action.score = mCorrectAnswer
-                            findNavController().navigate(action)
-                        }
-                    }
+                    showToast(requireContext(), "Pilih jawaban terlebih dahulu")
+                    return
                 } else {
-                    // user menekan tombol jawaban
-                    // cek salah/benar jawabanya
-                    val question = mQuestionsList[mCurrentPosition - 1]
-                    if (question.correctAnswer != mSelectedPosition) {
+                    submitCounter++
+                }
 
-                        answerView(mSelectedPosition, R.drawable.wrong_border)
-                    } else {
-                        mCorrectAnswer++
+                // User submits an answer
+                val question = mQuestionsList[mCurrentPosition - 1]
+                if (question.correctAnswer != mSelectedPosition) {
+                    answerView(mSelectedPosition, R.drawable.wrong_border)
+                } else {
+                    mCorrectAnswer++
+                }
+                answerView(question.correctAnswer, R.drawable.correct_border)
 
-                    }
-                    answerView(question.correctAnswer, R.drawable.correct_border)
-                    if (mCurrentPosition == mQuestionsList.size) {
-                        binding.btnSubmit.text = "Selesai"
-                    } else {
-                        binding.btnSubmit.text = "Pertanyaan Selanjutnya"
-                    }
+                // Disable options
+                selectedOptionView(binding.tvOptionOne, false)
+                selectedOptionView(binding.tvOptionTwo, false)
+                selectedOptionView(binding.tvOptionThree, false)
+                selectedOptionView(binding.tvOptionFour, false)
+
+                // Update button text based on the current position
+                if (mCurrentPosition < mQuestionsList.size ) {
+                    binding.btnSubmit.text = "Pertanyaan Selanjutnya"
+                } else {
+                    binding.btnSubmit.text = "Selesai"
+                }
+
+                // Check if it's time to move to the next question
+                if (submitCounter == 2) {
                     mSelectedPosition = 0
+                    mCurrentPosition++
+                    submitCounter = 0
+
+                    if (mCurrentPosition <= mQuestionsList.size) {
+                        setQuestion()
+                    } else {
+                        // Display the final score
+                        val action = QuizFragmentDirections.actionGameFragmentToScoreFragment()
+                        val nameOfPlayer by navArgs<QuizFragmentArgs>()
+                        action.score = mCorrectAnswer
+                        findNavController().navigate(action)
+                    }
                 }
             }
+
         }
     }
 
@@ -191,5 +210,9 @@ class QuizFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun selectedOptionView(tv: TextView, enableOptions: Boolean) {
+        tv.isEnabled = enableOptions
     }
 }

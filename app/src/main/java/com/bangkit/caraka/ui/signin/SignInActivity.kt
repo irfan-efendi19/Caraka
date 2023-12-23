@@ -1,5 +1,6 @@
 package com.bangkit.caraka.ui.signin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.bangkit.caraka.databinding.ActivitySigninBinding
 import com.bangkit.caraka.ui.home.HomeActivity
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.ui.signup.SignUpActivity
+import com.bangkit.caraka.utill.isNetworkConnected
 import com.bangkit.caraka.utill.showToast
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -23,6 +25,7 @@ import retrofit2.HttpException
 
 class SignInActivity : AppCompatActivity() {
 
+    private lateinit var context: Context
     private val viewModel by viewModels<SignInViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -34,6 +37,8 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        context = this@SignInActivity
 
         supportActionBar?.hide()
         showLoading(false)
@@ -61,60 +66,60 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.signinButton.setOnClickListener {
-            try {
-                val email = binding.emailEditText.text.toString()
-                val password = binding.passwordEditText.text.toString()
+            if (isNetworkConnected(context)) {
+                try {
+                    val email = binding.emailEditText.text.toString()
+                    val password = binding.passwordEditText.text.toString()
 
-                if (email.isEmpty()) {
-                    binding.emailEditText.error = "Email Tidak Boleh Kosong"
-                } else if (password.isEmpty()) {
-                    binding.passwordEditText.error = "Password Tidak Boleh Kosong"
-                } else {
-                    lifecycleScope.launch {
-                        viewModel.login(email, password).observe(this@SignInActivity) { result ->
-                            if (result != null) {
-                                when (result) {
-                                    is ResultData.Loading -> {
-                                        showLoading(true)
-                                    }
-
-                                    is ResultData.Success -> {
-                                        showLoading(false)
-                                        showToast(this@SignInActivity, "Berhasil Masuk!")
-                                        lifecycleScope.launch {
-                                            save(
-                                                UserModel(
-                                                    result.data.loginResult?.token.toString(),
-                                                    result.data.loginResult?.name.toString(),
-                                                    result.data.loginResult?.userId.toString(),
-                                                    true
-                                                )
-                                            )
+                    if (email.isEmpty()) {
+                        binding.emailEditText.error = "Email Tidak Boleh Kosong"
+                    } else if (password.isEmpty()) {
+                        binding.passwordEditText.error = "Password Tidak Boleh Kosong"
+                    } else {
+                        lifecycleScope.launch {
+                            viewModel.login(email, password).observe(this@SignInActivity) { result ->
+                                if (result != null) {
+                                    when (result) {
+                                        is ResultData.Loading -> {
+                                            showLoading(true)
                                         }
-                                    }
 
-                                    is ResultData.Error -> {
-                                        showLoading(false)
-                                        showToast(this@SignInActivity, result.error)
-                                    }
+                                        is ResultData.Success -> {
+                                            showLoading(false)
+                                            showToast(this@SignInActivity, "Berhasil Masuk!")
+                                            lifecycleScope.launch {
+                                                save(
+                                                    UserModel(
+                                                        result.data.loginResult?.token.toString(),
+                                                        result.data.loginResult?.name.toString(),
+                                                        result.data.loginResult?.userId.toString(),
+                                                        true
+                                                    )
+                                                )
+                                            }
+                                        }
 
-                                    else -> {
-
+                                        is ResultData.Error -> {
+                                            showLoading(false)
+                                            showToast(this@SignInActivity, result.error)
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+
+                } catch (e: HttpException) {
+                    showLoading(false)
+                    val errorBody = e.response()?.errorBody()?.string()
+                    val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
+                    showToast(context, errorResponse.message)
                 }
-
-            } catch (e: HttpException) {
-                showLoading(false)
-                val errorBody = e.response()?.errorBody()?.string()
-                val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
-                showToast(this, errorResponse.message)
+            } else {
+                showToast(context, "Tidak Ada Internet")
             }
-
         }
+
     }
 
     private fun save(session: UserModel) {

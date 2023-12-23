@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
-import com.bangkit.caraka.databinding.ActivityKamusBinding
 import com.bangkit.caraka.databinding.ActivityScannerResultBinding
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.utill.getRotatedBitmap
@@ -19,6 +18,7 @@ class ScannerResultActivity : AppCompatActivity() {
     private var _binding: ActivityScannerResultBinding? = null
     private val binding get() = _binding!!
     private lateinit var scannerViewModel: ScannerViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityScannerResultBinding.inflate(layoutInflater)
@@ -30,8 +30,7 @@ class ScannerResultActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory.getInstance(this)
         scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
 
-
-
+        val daerahFromScanner = intent.getStringExtra(CameraActivity.EXTRA_DAERAH)
         val imageUrlCamera = intent.getStringExtra(ScannerActivity.EXTRA_CAMERA_IMAGE)?.toUri()
         val imageUrlGallery = intent.getStringExtra(ScannerActivity.EXTRA_GALLERY_IMAGE)?.toUri()
         val scanResult = intent.getStringExtra(ScannerActivity.EXTRA_RESULT_SCANNER)
@@ -50,6 +49,7 @@ class ScannerResultActivity : AppCompatActivity() {
 
         binding.btnDeteksiUlang.setOnClickListener {
             val intent = Intent(this, ScannerActivity::class.java)
+            intent.putExtra(CameraActivity.EXTRA_DAERAH, daerahFromScanner)
             startActivity(intent)
         }
 

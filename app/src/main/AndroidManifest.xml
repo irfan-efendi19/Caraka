@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
     <application
         android:allowBackup="true"
@@ -27,14 +29,19 @@
             android:exported="false" />
         <activity
             android:name=".ui.camera.ScannerResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.camera.ScannerActivity"/>
         <activity
             android:name=".ui.kamus.KamusActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.camera.ScannerActivity"
-            android:exported="true">
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".ui.camera.CameraActivity">
         </activity>
         <activity
             android:name=".ui.quiz.QuizActivity"

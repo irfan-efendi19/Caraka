@@ -2,7 +2,6 @@ package com.bangkit.caraka.ui.camera
 
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +27,7 @@ import com.bangkit.caraka.data.networking.response.UploadResponse
 import com.bangkit.caraka.databinding.ActivityScannerBinding
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.utill.createCustomTempFile
+import com.bangkit.caraka.utill.isNetworkConnected
 import com.bangkit.caraka.utill.showToast
 import com.bangkit.caraka.utill.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
@@ -47,7 +47,8 @@ class ScannerActivity : AppCompatActivity() {
     var isCameraImage: Boolean = false
     private var isGalleryImage: Boolean = false
     private lateinit var uploadResponseObserver: Observer<UploadResponse>
-    private lateinit var daerah: String
+    private var daerah: String? = null
+    private lateinit var context: Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class ScannerActivity : AppCompatActivity() {
         val viewModelFactory = ViewModelFactory.getInstance(this)
         scannerViewModel = ViewModelProvider(this, viewModelFactory)[ScannerViewModel::class.java]
 
+        context = this@ScannerActivity
         daerah = intent.getStringExtra(CameraActivity.EXTRA_DAERAH).toString()
 
         binding.constraintLayoutScannerHolder.visibility = View.VISIBLE
@@ -67,7 +69,7 @@ class ScannerActivity : AppCompatActivity() {
         }
 
         binding.captureImage.setOnClickListener{
-            if (isNetworkConnected()) {
+            if (isNetworkConnected(context)) {
                 takePhoto()
             } else {
                 showToast(this,"No internet connection.")
@@ -75,7 +77,7 @@ class ScannerActivity : AppCompatActivity() {
         }
 
         binding.btnGallery.setOnClickListener{
-            if (isNetworkConnected()) {
+            if (isNetworkConnected(context)) {
                 startGallery()
             } else {
                 showToast(this, "No internet connection.")
@@ -92,6 +94,7 @@ class ScannerActivity : AppCompatActivity() {
                 succes -> {
                     resultText = response.hasil
                     binding.progressBarScanner.visibility = View.GONE
+                    binding.constraintLayoutScannerHolder.visibility = View.VISIBLE
                     val intent = Intent(this@ScannerActivity, ScannerResultActivity::class.java)
                     when {
                         isCameraImage -> {
@@ -106,6 +109,8 @@ class ScannerActivity : AppCompatActivity() {
                         }
                     }
                     intent.putExtra(EXTRA_RESULT_SCANNER, resultText)
+                    intent.putExtra(CameraActivity.EXTRA_DAERAH, daerah)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 }
 
@@ -266,30 +271,25 @@ class ScannerActivity : AppCompatActivity() {
 
     private fun uploadImage(image: File) {
         if (currentImageUri != null) {
-                Log.d("Image File", "showImage: ${image.path}")
-                val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
-                val multipartBody = MultipartBody.Part.createFormData(
-                    "file",
-                    image.name,
-                    requestImageFile
-                )
-
+            Log.d("Image File", "showImage: ${image.path}")
+            val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "file",
+                image.name,
+                requestImageFile
+            )
             if (daerah != null) {
-                scannerViewModel.uploadFile(multipartBody, daerah)
+                scannerViewModel.uploadFile(multipartBody, daerah!!)
+            } else {
+                Log.d("Scanner Activity", "Daerah : $daerah")
             }
 //                scannerViewModel.isLoading.observe(this) {
 //                    showLoading(it)
 //                    showConstraintLayoutHolder(it)
 //            }
-                restartObservation()
-                Log.i("uploadImage", "file diupload")
+            restartObservation()
+            Log.i("uploadImage", "file diupload")
         }
-    }
-
-    private fun isNetworkConnected(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
     }
 
     private fun hideSystemUI() {
