@@ -21,6 +21,7 @@ class CameraActivity : AppCompatActivity() {
         val bali = "bali"
         val lampung = "lampung"
         val sunda = "sunda"
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Deteksi Aksara"
 

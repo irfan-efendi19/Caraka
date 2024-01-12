@@ -2,6 +2,7 @@ package com.bangkit.caraka.utill
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.exifinterface.media.ExifInterface
 import com.bumptech.glide.Glide
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -28,6 +30,7 @@ fun showToast(context: Context, message: String?) {
 
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
 private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
+private const val MAXIMAL_SIZE = 1000000
 
 fun createCustomTempFile(context: Context): File {
     val filesDir = context.externalCacheDir
@@ -46,22 +49,22 @@ fun uriToFile(imageUri: Uri, context: Context): File {
     return myFile
 }
 
-//fun File.reduceFileImage(): File {
-//    val file = this
-//    val bitmap = BitmapFactory.decodeFile(file.path).getRotatedBitmap(file)
-//    var compressQuality = 100
-//    var streamLength: Int
-//    do {
-//        val bmpStream = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
-//        val bmpPicByteArray = bmpStream.toByteArray()
-//        streamLength = bmpPicByteArray.size
-//        compressQuality -= 5
-//    } while (streamLength > MAXIMAL_SIZE)
-//    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-//
-//    return file
-//}
+fun File.reduceFileImage(): File {
+    val file = this
+    val bitmap = BitmapFactory.decodeFile(file.path).getRotatedBitmap(file)
+    var compressQuality = 100
+    var streamLength: Int
+    do {
+        val bmpStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+        val bmpPicByteArray = bmpStream.toByteArray()
+        streamLength = bmpPicByteArray.size
+        compressQuality -= 5
+    } while (streamLength > MAXIMAL_SIZE)
+    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+
+    return file
+}
 
 
 // Extension function on Bitmap

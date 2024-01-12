@@ -105,29 +105,6 @@ class AppRepository private constructor(
 //    }
 
 
-    suspend fun uploadFile1(file: MultipartBody.Part){
-        try {
-            val successResponse = apiService.uploadImage1(file)
-            _uploadResponse.value = successResponse
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse =  Gson().fromJson(errorBody, UploadResponse::class.java)
-            _uploadResponse.value = errorResponse
-        }
-    }
-
-
-    suspend fun uploadFile2(file: MultipartBody.Part){
-        try {
-            val successResponse = apiService.uploadImage2(file)
-            _uploadResponse.value = successResponse
-        } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse =  Gson().fromJson(errorBody, UploadResponse::class.java)
-            _uploadResponse.value = errorResponse
-        }
-    }
-
     //fungsi menyimpan preference key
     suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)

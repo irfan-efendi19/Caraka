@@ -28,27 +28,10 @@ interface ApiService {
         @Field("password") password: String,
     ): LoginResponse
 
-//    @Multipart
-//    @POST("predict/bali")
-//    suspend fun uploadImage(
-//        @Part file: MultipartBody.Part,
-//    ): UploadResponse
     @Multipart
     @POST("predict/{daerah}")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
         @retrofit2.http.Path("daerah") daerah: String
-    ): UploadResponse
-
-    @Multipart
-    @POST("predict/sunda")
-    suspend fun uploadImage1(
-        @Part file: MultipartBody.Part,
-    ): UploadResponse
-
-    @Multipart
-    @POST("predict/Lampung")
-    suspend fun uploadImage2(
-        @Part file: MultipartBody.Part,
     ): UploadResponse
 }

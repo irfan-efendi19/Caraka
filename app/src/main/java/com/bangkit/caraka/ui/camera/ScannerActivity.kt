@@ -283,10 +283,6 @@ class ScannerActivity : AppCompatActivity() {
             } else {
                 Log.d("Scanner Activity", "Daerah : $daerah")
             }
-//                scannerViewModel.isLoading.observe(this) {
-//                    showLoading(it)
-//                    showConstraintLayoutHolder(it)
-//            }
             restartObservation()
             Log.i("uploadImage", "file diupload")
         }

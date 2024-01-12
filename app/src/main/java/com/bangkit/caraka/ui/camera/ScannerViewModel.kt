@@ -21,19 +21,6 @@ class ScannerViewModel(private val appRepository: AppRepository) : ViewModel() {
         }
     }
 
-    fun uploadFile1(file: MultipartBody.Part) {
-        viewModelScope.launch {
-            appRepository.uploadFile1(file)
-        }
-    }
-
-    fun uploadFile3(file: MultipartBody.Part) {
-        viewModelScope.launch {
-            appRepository.uploadFile2(file)
-        }
-    }
-
-
     val _scanResponse = MutableLiveData<ScanResponse>()
     val scanResponse : LiveData<ScanResponse> =  _scanResponse
     fun scanImageResult() {
