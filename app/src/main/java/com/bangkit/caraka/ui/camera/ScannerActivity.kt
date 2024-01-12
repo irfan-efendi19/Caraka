@@ -28,6 +28,7 @@ import com.bangkit.caraka.databinding.ActivityScannerBinding
 import com.bangkit.caraka.ui.ViewModelFactory
 import com.bangkit.caraka.utill.createCustomTempFile
 import com.bangkit.caraka.utill.isNetworkConnected
+import com.bangkit.caraka.utill.reduceFileImage
 import com.bangkit.caraka.utill.showToast
 import com.bangkit.caraka.utill.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
@@ -68,15 +69,15 @@ class ScannerActivity : AppCompatActivity() {
             startCamera()
         }
 
-        binding.captureImage.setOnClickListener{
+        binding.captureImage.setOnClickListener {
             if (isNetworkConnected(context)) {
                 takePhoto()
             } else {
-                showToast(this,"No internet connection.")
+                showToast(this, "No internet connection.")
             }
         }
 
-        binding.btnGallery.setOnClickListener{
+        binding.btnGallery.setOnClickListener {
             if (isNetworkConnected(context)) {
                 startGallery()
             } else {
@@ -90,7 +91,7 @@ class ScannerActivity : AppCompatActivity() {
             val succes = response.status == null
             val failed = response.status == "fail"
             Log.d("Scanner Activity", "Perform Observe")
-            when{
+            when {
                 succes -> {
                     resultText = response.hasil
                     binding.progressBarScanner.visibility = View.GONE
@@ -102,6 +103,7 @@ class ScannerActivity : AppCompatActivity() {
                             isCameraImage = false
                             response.status = "done"
                         }
+
                         isGalleryImage -> {
                             intent.putExtra(EXTRA_GALLERY_IMAGE, currentImageUri.toString())
                             isGalleryImage = false
@@ -133,7 +135,6 @@ class ScannerActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     override fun onResume() {
@@ -268,9 +269,9 @@ class ScannerActivity : AppCompatActivity() {
     }
 
 
-
     private fun uploadImage(image: File) {
-        if (currentImageUri != null) {
+        currentImageUri?.let { uri ->
+            uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${image.path}")
             val requestImageFile = image.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
@@ -300,9 +301,6 @@ class ScannerActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
-
-
-
 
 
     private fun restartObservation() {
